@@ -12,7 +12,9 @@
         <p class="heading">{{this.selectedSdk}}</p>
 
         <ul>
-          <li class="menu-item" v-for="link in pathLinks[this.feature]" :key="link">{{ link.title }}</li>
+          <li v-for="link in pathLinks[this.feature]" :key="link">
+            <a class="menu-item" @click="changeContent">{{ link.title }}</a>
+          </li>
         </ul>
       </div>
       <div class="doc-content" ref="content"></div>
@@ -20,7 +22,7 @@
       <div class="right-nav">
         <select class="custom-select" v-on:change="selectSdk" v-model="selectedSdk">
           <!-- <option selected>Select Technology</option> -->
-          <option v-for="item in sdkItems" :key="item.value" :value="item.value">{{ item.name }}</option>
+          <option v-for="item in sdkItems" :key="item.value" :value="item.value">{{ item.name }}></option>
         </select>
 
         <hr />
@@ -28,7 +30,7 @@
         <p class="heading">TABLE OF CONTENTS</p>
 
         <ul>
-          <li class="menu-item" v-for="item in headings" :key="item.innerText"><router-link @click="changeMenu">{{ item.innerText }}</router-link></li>
+          <li class="" v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
         </ul>
       </div>
     </div>
@@ -101,11 +103,7 @@ export default {
     displayContent: function() {
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
-      console.log(this.headings);
-      // Array.from(headings).forEach(el => {
-      //   console.log(el);
-      //   // this.headings.push(el);
-      // });
+      
 
       this.$http
         .get(
@@ -132,7 +130,7 @@ export default {
             linkIcon.setAttribute("href", `#${heading.innerHTML}`);
             linkIcon.setAttribute("class", "anchor");
             linkIcon.innerHTML = linkContent;
-            heading.append(linkIcon);
+            // heading.append(linkIcon);
           }
           // console.log(pre);
         })
@@ -152,8 +150,17 @@ export default {
           .join("")
       );
     },
-    appendAnchorLinks: function() {
-      const headings = document.querySelectorAll("h2,h3");
+    changeContent: function(event) {
+      event.preventDefault();
+      this.displayContent();
+
+      var menuList = document.getElementsByClassName("menu-item");
+      Array.from(menuList).forEach(el => {
+        el.classList.remove("active-link");
+      });
+
+      console.log(event.target);
+      event.target.classList.add("active-link");
     }
   }
 };
@@ -231,8 +238,14 @@ li {
   margin: 16px 0px;
   list-style-type: none;
 }
-li a:active {
-  color: red;
+li a {
+  cursor: pointer;
+}
+li a:hover {
+  color: #4c5257 !important;
+}
+.active-link {
+  color: #f5a623 !important;
 }
 .title {
   font-family: F-Wave-Regular;
