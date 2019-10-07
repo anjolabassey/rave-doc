@@ -131,6 +131,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.tech {
+  background-color: #f2f2f2;
+}
 .jumbotron {
   height: 475px;
   background-color: #fef8ee;
@@ -187,6 +190,7 @@ export default {
   background: #ffffff;
   border: 1px solid #ffffff;
   margin-right: 10px;
+  margin-bottom: 20px;
   box-sizing: border-box;
   box-shadow: 0px 1.2px 5.6px rgba(0, 0, 0, 0.12);
   color: #2a3255;
@@ -223,5 +227,22 @@ hr {
   font-family: Open-Sans;
   font-style: normal;
   font-weight: normal;
+}
+@media all and (max-width: 1024px) {
+  .tech-section {
+    padding-right: 150px;
+    padding-left: 150px;
+  }
+}
+@media all and (max-width: 768px) {
+  .tech-section {
+    padding-right: 70px;
+    padding-left: 70px;
+  }
+}
+@media all and (max-width: 425px) {
+  .subtitle {
+    font-size: 16px;
+  }
 }
 </style>

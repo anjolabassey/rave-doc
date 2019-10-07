@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <form @submit="login" class="login_container">
       <h5 class="header text-center">LOGIN TO GET YOUR API KEYS</h5>
       <div class="form-group">
@@ -59,24 +59,11 @@ export default {
     login(event) {
       this.buttonText = "Fetching Keys..";
       document.getElementById("loginButton").disabled = true;
-      event.preventdefault();
+      event.preventDefault();
       let requestObject = {
         identifier: this.email,
         password: this.password
       };
-
-      console.log(requestObject);
-
-      //   this.$http({
-      //     method: "post",
-      //     url: "https://api.ravepay.co/login",
-      //     data: {
-      //       firstName: "Fred",
-      //       lastName: "Flintstone"
-      //     }
-      //   }).then(response => {
-      //       console.log(response.data);
-      //     });
 
       this.$http
         .post("https://api.ravepay.co/login", requestObject, {
@@ -91,7 +78,7 @@ export default {
         .catch(function(error) {
           console.log(error);
           //   this.isError = true;
-          this.errorText = error;
+          //   this.errorText = error;
         });
     }
   }
@@ -100,6 +87,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.login {
+  background-color: #ffffff !important;
+}
 .login_container {
   background-color: #ffffff;
   box-shadow: 0px 1.2px 5.6px rgba(0, 0, 0, 0.12);
@@ -157,4 +147,5 @@ input {
 .error-text {
   color: red;
 }
+
 </style>

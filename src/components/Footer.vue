@@ -57,4 +57,10 @@ export default {
   line-height: 24px;
   border-radius: 4px;
 }
+@media all and (max-width: 768px) {
+
+  .footer {
+    text-align: center;
+  }
+}
 </style>

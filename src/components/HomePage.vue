@@ -287,18 +287,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-page {
+  background-color: #f2f2f2;
+}
 .navbar-brand img {
   width: 130px;
   /* margin-right: 199px; */
   /* margin-top: 29px; */
 }
 .jumbotron {
-  height: 1390px;
+  height: 900px;
   background-color: #fef8ee;
   text-align: center;
+  margin-bottom: 500px;
 }
 .jumbotron .title {
-  margin-top: 80px;
+  margin-top: 60px;
 }
 .title {
   font-size: 48px;
@@ -309,7 +313,7 @@ export default {
 .subtitle {
   font-size: 24px;
   line-height: 32px;
-  margin-top: 14px;
+  margin-top: 10px;
   font-family: F-Wave-Regular;
   color: #4a4a4a;
 }
@@ -329,6 +333,7 @@ export default {
   text-decoration: none;
   border: none;
   padding: 17px 22px;
+  width: 199px;
 }
 .login-btn a {
   background: #f5a623;
@@ -344,16 +349,15 @@ export default {
 .features-container {
   width: 100%;
   background-color: #ffffff;
-  margin-top: 50px;
-  height: 900px;
-  padding: 68px 78px;
+  margin-top: 125px;
+  height: 800px;
+  padding: 1px 20px;
   overflow: auto;
   border-radius: 6px;
 }
 .features-container #title {
   font-size: 32px;
   line-height: 38px;
-  margin-top: 68px;
   color: #000000;
   font-family: Flutterwave;
 }
@@ -380,6 +384,9 @@ export default {
   font-size: 18px;
   line-height: 22px;
   font-family: Flutterwave;
+}
+.row a {
+  text-decoration: none;
 }
 .features-container .card .card-text {
   font-size: 14.4px;
@@ -588,5 +595,13 @@ pre {
 .guides-container .card .footer a {
   text-decoration: none;
   color: #4e5770;
+}
+@media all and (max-width: 768px) {
+  #sub-title {
+    padding: 0 10px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
 }
 </style>

@@ -52,4 +52,5 @@ export default {
   line-height: 22px;
   color: #333333;
 }
+
 </style>

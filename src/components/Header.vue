@@ -1,9 +1,22 @@
 <template>
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img alt="Flutterwave logo" src="../assets/img/flw_icon.svg" />
       </a>
+      
+      <div class="search">
+        <form @click="displaySearch" class="form-inline">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search the documentation"
+            aria-label="Search"
+          />
+          <img class src="../assets/img/search.svg" />
+        </form>
+      </div>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -15,34 +28,14 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="search">
-          <form @click="displaySearch" class="form-inline">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search the documentation"
-          aria-label="Search"
-        />
-        <img class src="../assets/img/search.svg" />
-      </form>
-      </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <!-- <form class="form-inline mr-auto">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" href="#">Support</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Support</a>
+            <a class="nav-link" href="#">Blog</a>
           </li>
           <li v-if="!loggedIn" class="nav-item">
             <router-link to="/Login" target="_blank" class="btn my-2 my-sm-0">Get API Keys</router-link>
@@ -66,7 +59,7 @@
       </div>
     </nav>
 
-    <Search v-if="showSearch"/>
+    <Search v-if="showSearch" />
   </div>
 </template>
 
@@ -102,10 +95,11 @@ export default {
 .navbar {
   background-color: #fef8ee;
   height: 77px;
+  padding: 21px 146px;
 }
 .navbar-brand img {
-  width: 130px;
-  margin-right: 199px;
+  width: 140px;
+  margin-right: 176px;
   /* margin-top: 29px; */
 }
 
@@ -116,8 +110,8 @@ export default {
   line-height: 19px;
   color: #333333;
 
-  margin-right: 37px;
-  /* margin-top: 32px; */
+  margin-right: 25px;
+  margin-top: 8px;
 }
 .navbar-collapse .btn {
   background: #f5a623;
@@ -135,16 +129,17 @@ export default {
 }
 
 .navbar-light .navbar-toggler-icon {
-    /* background-color: #f5a623; */
+  /* background-color: #f5a623; */
   color: red;
 }
 .search {
   display: inline-flex;
   position: relative;
   height: 40px;
-  margin-right: 17px;
-  margin-top: 1px;
-  overflow: hidden;
+  /* margin-right: 17px; */
+  /* margin-left: 30px; */
+  margin-top: 2px;
+  /* overflow:hidden; */
   border-radius: 20.25px;
 }
 .search form input {
@@ -162,10 +157,35 @@ export default {
 
   padding: 0 24px;
   font-family: F-Wave-Regular;
+  font-size: 14.4px;
+  line-height: 17px;
+  color: #101010;
 }
 .search form img {
   position: absolute;
   padding: 0.6rem;
   right: 25px;
+}
+@media all and (max-width: 1024px) {
+  .search form input {
+    width: 300px;
+  }
+  .navbar-brand img {
+    margin-right: 106px;
+  }
+  .navbar {
+    padding: 21px 116px;
+  }
+}
+@media all and (max-width: 768px) {
+  .search form input {
+    width: 250px;
+  }
+  .navbar-brand img {
+    margin-right: 50px;
+  }
+  .navbar {
+    padding: 21px 50px;
+  }
 }
 </style>

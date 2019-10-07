@@ -59,7 +59,7 @@ export default {
   font-family: F-Wave-Regular;
 }
 .ais-index {
-  background-color: red;
+  /* background-color: red; */
   padding: 5px auto;
 }
 .ais-index .ais-input {
@@ -78,7 +78,7 @@ button.ais-clear {
 }
 
 .ais-results {
-  background-color: aqua;
+  /* background-color: aqua; */
   min-height: 350px;
   color: limegreen;
 }

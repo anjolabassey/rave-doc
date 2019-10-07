@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="docs">
     <Header />
 
     <div class="container doc-container">
@@ -21,8 +21,8 @@
 
       <div class="right-nav">
         <select class="custom-select" v-on:change="selectSdk" v-model="selectedSdk">
-          <!-- <option selected>Select Technology</option> -->
-          <option v-for="item in sdkItems" :key="item.value" :value="item.value">{{ item.name }}></option>
+          <option selected>Select Technology</option>
+          <option v-for="item in sdkItems" :key="item.value" :value="item.value">{{ item.name }}</option>
         </select>
 
         <hr />
@@ -168,6 +168,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.docs {
+  background-color: #f2f2f2;
+}
 .doc-container {
   display: flex;
   justify-content: space-around;
@@ -210,7 +213,7 @@ export default {
   justify-content: center;
   margin: 0 7%;
   padding: 3% 0;
-  margin-bottom: 89px;
+  /* margin-bottom: 89px; */
   margin-top: 82px;
 }
 .left-nav {
@@ -530,5 +533,13 @@ pre {
 }
 .highlight .il {
   color: #099;
+}
+
+@media all and (max-width: 768px) {
+
+  .help-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 </style>
