@@ -188,4 +188,19 @@ export default {
     padding: 21px 50px;
   }
 }
+@media all and (max-width: 425px) {
+  .search {
+    height: 40px;
+  }
+  .search form input {
+    width: 150px;
+  }
+  .navbar-brand img {
+    margin-right: 10px;
+    width: 100px;
+  }
+  .navbar {
+    padding: 21px 30px;
+  }
+}
 </style>

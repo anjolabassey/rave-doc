@@ -30,7 +30,7 @@
         <p class="heading">TABLE OF CONTENTS</p>
 
         <ul>
-          <li class="" v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
+          <li class v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
         </ul>
       </div>
     </div>
@@ -42,9 +42,27 @@
     <div class="container rating">
       <p class="title">Was this page helpful?</p>
 
-      <a class="button" id="yesButton" href>Yes</a>
+      <a @click="rateGood" class="button" id="yesButton" href>Yes</a>
 
-      <a class="button" id="noButton" href>No</a>
+      <a
+        @click="rateBad"
+        class="button"
+        id="noButton"
+        href
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Tooltip on top"
+      >No</a>
+
+      <!-- <a
+        tabindex="0"
+        class="btn btn-lg btn-danger"
+        role="button"
+        data-toggle="popover"
+        data-trigger="focus"
+        title="Thank you for helping improve Rave's documentation"
+        data-content="If you need help or have any questions, please consider contacting support."
+      >Dismissible popover</a>-->
     </div>
   </div>
 </template>
@@ -78,6 +96,10 @@ export default {
     this.displayContent();
     this.getPathLink();
   },
+  // mounted() {
+  //   var headings = document.getElementsByTagName("h2");
+  //     this.headings = headings;
+  // },
   methods: {
     selectSdk: function() {
       // console.log(event);
@@ -102,8 +124,7 @@ export default {
     },
     displayContent: function() {
       var headings = document.getElementsByTagName("h2");
-      this.headings = headings;
-      
+       this.headings = headings;
 
       this.$http
         .get(
@@ -154,6 +175,9 @@ export default {
       event.preventDefault();
       this.displayContent();
 
+      var headings = document.getElementsByTagName("h2");
+      this.headings = headings;
+
       var menuList = document.getElementsByClassName("menu-item");
       Array.from(menuList).forEach(el => {
         el.classList.remove("active-link");
@@ -161,6 +185,12 @@ export default {
 
       console.log(event.target);
       event.target.classList.add("active-link");
+    },
+    rateGood: function() {
+      console.log("thumbs up");
+    },
+    rateBad: function() {
+      console.log("thumbs up");
     }
   }
 };
@@ -536,7 +566,6 @@ pre {
 }
 
 @media all and (max-width: 768px) {
-
   .help-container {
     padding-left: 20px;
     padding-right: 20px;
