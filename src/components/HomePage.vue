@@ -79,12 +79,11 @@
             <div class="card" @click="goToDocs('split-payment')">
               <img src="../assets/img/split-payment.svg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <p class="card-title">Payments</p>
+                <p class="card-title">Split payment</p>
                 <p class="card-text">
-                  Payment links allow merchants accept payments
-                  on their site without the need to integrate. This
-                  is great for Individuals and merchants who don't
-                  have developer resources.
+                  Rave's split payment feature allows you split a
+                  transaction between two (2) or more accounts
+                  and collect fees on the transaction.
                 </p>
                 <a href="#" class>View documentation</a>
               </div>
@@ -92,9 +91,9 @@
           </div>
           <div class="col-4">
             <div class="card" @click="goToDocs('bills')">
-              <img src="../assets/img/bills.png" class="card-img-top" alt="..." />
+              <img src="../assets/img/bills.svg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <p class="card-title">Subscriptions</p>
+                <p class="card-title">Bills Payment / Airtime Purchase</p>
                 <p class="card-text">
                   Payment links allow merchants accept payments
                   on their site without the need to integrate. This
@@ -109,12 +108,10 @@
             <div class="card" @click="goToDocs('identity')">
               <img src="../assets/img/identity.svg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <p class="card-title">Transfers</p>
+                <p class="card-title">Identity verification</p>
                 <p class="card-text">
-                  Payment links allow merchants accept payments
-                  on their site without the need to integrate. This
-                  is great for Individuals and merchants who don't
-                  have developer resources.
+                  Rave allows you to verify customer's BVN
+                  and perform KYC.
                 </p>
                 <a href="#" class>View documentation</a>
               </div>
@@ -280,10 +277,10 @@ export default {
     };
   },
   methods: {
-      goToDocs: function(feat) {
-        //   alert(`we going`);
-          this.$router.push({ name: 'docs', params: { feature: feat } })
-      }
+    goToDocs: function(feat) {
+      //   alert(`we going`);
+      this.$router.push({ name: "docs", params: { feature: feat } });
+    }
   }
 };
 </script>
