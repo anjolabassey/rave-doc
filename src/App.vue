@@ -1,31 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
+    </div> -->
+
     <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+   background-color: #f2f2f2;
 }
-#nav {
-  padding: 30px;
+/* fonts */
+@font-face {
+  font-family: Flutterwave;
+  src: url(./assets/font/Flutterwave-Black.ttf);
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+@font-face {
+  font-family: F-Wave-Regular;
+  src: url(./assets/font/FLW-Regular.ttf);
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+@font-face {
+  font-family: SFProDisplay;
+  src: url(./assets/font/SFProDisplay-Regular.ttf);
+}
+@font-face {
+  font-family: Open-Sans;
+  src: url(./assets/font/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: Open-Sans-Semibold;
+  src: url(./assets/font/OpenSans-Semibold.ttf);
 }
 </style>
