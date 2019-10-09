@@ -5,8 +5,53 @@
         <img alt="Flutterwave logo" src="../assets/img/flw_icon.svg" />
       </a>
 
-      <div class="search">
-        <form @click="displaySearch" class="form-inline">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModalScrollable"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalScrollableTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalScrollableTitle">Search Bar</h5> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ais-index
+                app-id="ENGYVJQGI9"
+                api-key="43dd4103be33bc9bb9fabe7e8807896c"
+                index-name="github-pages"
+              >
+                <ais-search-box></ais-search-box>
+                <ais-results>
+                  <template slot-scope="{ result }">
+                    <ais-refinement-list attributeName="categories" :sortBy="['title']" />
+
+                    <ais-hits v-if="result.length > 0">
+                      <!-- customize your hits as usual -->
+                    </ais-hits>
+                    <div v-else>
+                      There are no hits found for:
+                      <q>{{query}}</q>
+                    </div>
+                    <!-- <h1>{{ result.url }}</h1> -->
+                    <!-- <a @click="getSearchResult" :href=result.url>{{result}}</a> -->
+                    <!-- <ais-highlight :result="result" attribute-name="title"></ais-highlight> -->
+                  </template>
+                </ais-results>
+              </ais-index>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div type=" button" class="search" data-toggle="modal" data-target="#exampleModalScrollable">
+        <form class="form-inline">
           <input
             class="form-control mr-sm-2"
             type="search"
@@ -68,7 +113,6 @@
               class="btn my-2 my-sm-0"
             >Get API Keys</router-link>
           </li>
-          <li>{{loggedIn}}</li>
         </ul>
       </div>
     </nav>

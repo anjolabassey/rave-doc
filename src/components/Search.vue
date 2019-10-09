@@ -1,38 +1,8 @@
 <template>
-  <div class="search_modal">
-    <div class="content">
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <ais-index
-        app-id="ENGYVJQGI9"
-        api-key="43dd4103be33bc9bb9fabe7e8807896c"
-        index-name="github-pages"
-      >
-        <!-- <ais-index
-        app-id="latency"
-        api-key="3d9875e51fbd20c7754e65422f7ce5e1"
-        index-name="bestbuy"
-        >-->
-        <ais-search-box :style="{ color: 'red', fontSize: '50px' }"></ais-search-box>
-        <ais-results>
-          <template slot-scope="{ result }">
-            <ais-refinement-list attributeName="categories" :sortBy="['title']" />
-            <ais-hits v-if="result.length > 0">
-              <!-- customize your hits as usual -->
-            </ais-hits>
-            <div v-else>
-              There are no hits found for:
-              <q>{{query}}</q>
-            </div>
-            <!-- <h1>{{ result.url }}</h1> -->
-            <!-- <a @click="getSearchResult" :href=result.url>{{result}}</a> -->
-            <!-- <ais-highlight :result="result" attribute-name="title"></ais-highlight> -->
-          </template>
-        </ais-results>
-      </ais-index>
-    </div>
-  </div>
+<div>
+
+
+</div>
 </template>
 
 <script>
