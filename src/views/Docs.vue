@@ -10,14 +10,31 @@
         </div>
 
         <p class="heading">{{this.selectedSdk}}</p>
+        <p>{{this.feature}}</p>
 
         <ul>
-          <li v-for="link in pathLinks[this.feature]" :key="link">
+          <li v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link">
             <a class="menu-item" @click="changeContent">{{ link.title }}</a>
           </li>
         </ul>
       </div>
-      <div class="doc-content" ref="content"></div>
+      <!-- <div class="doc-content" ref="content">
+      </div>-->
+
+      <div class="doc-content">
+        <div class="keys-callout" v-if="showKeys">
+          <p class="header">YOUR API KEYS</p>
+          <p class="text">
+            Public key:
+            <span class="keys">{{publicKey}}</span>
+          </p>
+          <p class="text">
+            Secret key:
+            <span class="keys">{{secretKey}}</span>
+          </p>
+        </div>
+        <div ref="content"></div>
+      </div>
 
       <div class="right-nav">
         <select class="custom-select" v-on:change="selectSdk" v-model="selectedSdk">
@@ -54,7 +71,7 @@
         title="Tooltip on top"
       >No</a>
 
-      <!-- <a
+      <a
         tabindex="0"
         class="btn btn-lg btn-danger"
         role="button"
@@ -62,7 +79,7 @@
         data-trigger="focus"
         title="Thank you for helping improve Rave's documentation"
         data-content="If you need help or have any questions, please consider contacting support."
-      >Dismissible popover</a>-->
+      >Dismissible popover</a>
     </div>
   </div>
 </template>
@@ -78,28 +95,42 @@ export default {
     Header,
     NeedHelp
   },
-  data: function() {
+  data() {
     return {
       selectedFeature: this.feature,
+      showKeys: false,
+      publicKey: "",
+      secretKey: "",
       sdkItems: [
         { value: "node", name: "Node Js" },
         { value: "python", name: "Python" },
         { value: "php", name: "PHP" }
       ],
       selectedSdk: "node",
+
       pathLinks: [],
       headings: [],
       content: ""
     };
   },
+
   created() {
     this.displayContent();
     this.getPathLink();
   },
-  // mounted() {
-  //   var headings = document.getElementsByTagName("h2");
-  //     this.headings = headings;
-  // },
+  mounted() {
+    var headings = document.getElementsByTagName("h2");
+    this.headings = headings;
+
+    if (localStorage.loggedIn) {
+      this.showKeys = localStorage.loggedIn;
+    }
+
+    if (localStorage.publicKey || localStorage.SecretKey) {
+      this.publicKey = localStorage.publicKey;
+      this.secretKey = localStorage.secretKey;
+    }
+  },
   methods: {
     selectSdk: function() {
       // console.log(event);
@@ -124,7 +155,7 @@ export default {
     },
     displayContent: function() {
       var headings = document.getElementsByTagName("h2");
-       this.headings = headings;
+      this.headings = headings;
 
       this.$http
         .get(
@@ -143,7 +174,7 @@ export default {
             el.classList.add("highlight");
           });
 
-          const headers = document.querySelectorAll("h2,h3");
+          // const headers = document.querySelectorAll("h2,h3");
           const linkContent = "  &#9875";
 
           for (const heading of headings) {
@@ -348,6 +379,35 @@ li a:hover {
 .anchor:hover {
   opacity: 1;
   text-decoration: none;
+}
+.keys-callout {
+  background-color: rgb(187, 229, 179, 0.5);
+  mix-blend-mode: normal;
+  border: 1px solid #c4cdd5;
+  box-sizing: border-box;
+  border-radius: 0px 3px 3px 0px;
+  width: 100%;
+  height: 80px;
+  font-family: SFProDisplay;
+  padding: 16px 24px;
+  border-left: 4px solid #b8e986;
+  color: #000000;
+}
+.keys-callout .header {
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 0.3em;
+}
+.keys-callout .text {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 600;
+  margin: 0.2em;
+}
+.keys-callout .keys {
+  color: #5f6cc7;
+  font-weight: 400;
+  margin: 0.2em;
 }
 
 /* markdown styling */

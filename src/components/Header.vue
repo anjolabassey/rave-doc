@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="/">
         <img alt="Flutterwave logo" src="../assets/img/flw_icon.svg" />
       </a>
-      
+
       <div class="search">
         <form @click="displaySearch" class="form-inline">
           <input
@@ -29,18 +29,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Support</a>
+            <a class="nav-link" target="_blank" href="https://support.flutterwave.com">Support</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Blog</a>
           </li>
-          <li v-if="!loggedIn" class="nav-item">
-            <router-link to="/Login" target="_blank" class="btn my-2 my-sm-0">Get API Keys</router-link>
-          </li>
+          
           <li v-if="loggedIn" class="nav-item dropdown">
+            <div class="nav-icon">
+            <div class="nav-item" v-if="isImage">
+            <img
+              class="img-fluid img-thumbnail"
+              :src="logo"
+            />
+          </div>
+          <div v-else class="nav-item">
+            <div class="avatar">{{ initials }}</div>
+          </div>
+          </div>
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -52,9 +60,18 @@
             >{{username}}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Logout</a>
+              <a @click="logout" class="dropdown-item" href="#">Logout</a>
             </div>
           </li>
+
+          <li v-else class="nav-item">
+            <router-link
+              :to="{ name: 'login' }"
+              target="_blank"
+              class="btn my-2 my-sm-0"
+            >Get API Keys</router-link>
+          </li>
+          <!-- <li>{{loggedIn}}</li> -->
         </ul>
       </div>
     </nav>
@@ -71,20 +88,52 @@ export default {
   components: {
     Search
   },
-  data: function() {
+  data() {
     return {
-      username: "Anjola",
+      username: "",
+      initials: "",
+      logo: "",
+      showSearch: false,
       loggedIn: false,
-      showSearch: false
+      isImage: false
     };
   },
+  mounted() {
+    if (localStorage.loggedIn) {
+      this.loggedIn = localStorage.loggedIn;
+      
+    }
+    if (localStorage.logo == "null") {
+      this.isImage = false;
+      
+    } else {
+      this.isImage = true;
+      this.logo = localStorage.logo;
+    }
+
+    const initials = localStorage.username
+      .split(" ")
+      .map(x => x[0])
+      .join("");
+    this.username = localStorage.username;
+    this.initials = initials;
+  },
+  // watch() {
+
+  // },
   methods: {
+    // Display the search modal when the search bar is clicked
     displaySearch() {
       if (this.showSearch == false) {
         this.showSearch = true;
       } else {
         this.showSearch = false;
       }
+    },
+    // Log user out of their profile on the documentation
+    logout() {
+      this.loggedIn = false;
+      
     }
   }
 };
@@ -141,6 +190,26 @@ export default {
   margin-top: 2px;
   /* overflow:hidden; */
   border-radius: 20.25px;
+}
+li img {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid #979797;
+}
+.avatar {
+  background: #ece4d5;
+  border: 1px solid #979797;
+  color: #333333;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.nav-icon {
+  float: left;
+  margin-right: 10px;
+  margin-top: 11px; 
 }
 .search form input {
   background: #fffcf6;

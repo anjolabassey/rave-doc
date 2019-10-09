@@ -13,11 +13,12 @@
         <div class="row button-row">
           <div class="col-6 text-right login-btn">
             <!-- <button @click="bhj" class="btn-primary" id="login">Get API Keys</button> -->
-            <router-link to="/Login" target="_blank">Get API Keys</router-link>
+             <router-link :to="{ name: 'login' }" target="_blank" >Get API Keys</router-link>
           </div>
           <div class="col-6 text-left help-btn">
             <!-- <a class="btn-primary" id="slack" href="#">Get help</a> -->
-            <router-link :to="{ name: 'Login'}" target="_blank">Get Help</router-link>
+            
+            <a href="https://support.flutterwave.com" target="_blank">Get Help</a>
           </div>
         </div>
       </div>
@@ -277,9 +278,9 @@ export default {
     };
   },
   methods: {
-    goToDocs: function(feat) {
+    goToDocs: function(value) {
       //   alert(`we going`);
-      this.$router.push({ name: "docs", params: { feature: feat } });
+      this.$router.push({ name: "docs", params: { feature: value } });
     }
   }
 };
