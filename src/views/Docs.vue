@@ -45,6 +45,7 @@
         <hr />
 
         <p class="heading">TABLE OF CONTENTS</p>
+        
 
         <ul>
           <li class v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
@@ -117,6 +118,8 @@ export default {
   created() {
     this.displayContent();
     this.getPathLink();
+
+    
   },
   mounted() {
     var headings = document.getElementsByTagName("h2");

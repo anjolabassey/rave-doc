@@ -36,19 +36,16 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Blog</a>
           </li>
-          
+
           <li v-if="loggedIn" class="nav-item dropdown">
             <div class="nav-icon">
-            <div class="nav-item" v-if="isImage">
-            <img
-              class="img-fluid img-thumbnail"
-              :src="logo"
-            />
-          </div>
-          <div v-else class="nav-item">
-            <div class="avatar">{{ initials }}</div>
-          </div>
-          </div>
+              <div class="nav-item" v-if="isImage">
+                <img class="img-fluid img-thumbnail" :src="logo" />
+              </div>
+              <div v-else class="nav-item">
+                <div class="avatar">{{ initials }}</div>
+              </div>
+            </div>
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -71,7 +68,7 @@
               class="btn my-2 my-sm-0"
             >Get API Keys</router-link>
           </li>
-          <!-- <li>{{loggedIn}}</li> -->
+          <li>{{loggedIn}}</li>
         </ul>
       </div>
     </nav>
@@ -101,14 +98,17 @@ export default {
   mounted() {
     if (localStorage.loggedIn) {
       this.loggedIn = localStorage.loggedIn;
-      
     }
-    if (localStorage.logo == "null") {
-      this.isImage = false;
-      
+
+    if (localStorage.logo) {
+      if (localStorage.logo == "null") {
+        this.isImage = false;
+      } else {
+        this.isImage = true;
+        this.logo = localStorage.logo;
+      }
     } else {
-      this.isImage = true;
-      this.logo = localStorage.logo;
+      this.isImage = false;
     }
 
     const initials = localStorage.username
@@ -133,7 +133,13 @@ export default {
     // Log user out of their profile on the documentation
     logout() {
       this.loggedIn = false;
-      
+      this.isImage = false;
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("secretKey");
+      localStorage.removeItem("publicKey");
+      localStorage.removeItem("username");
+      localStorage.removeItem("logo");
+      localStorage.removeItem("flwAuthToken");
     }
   }
 };
@@ -209,7 +215,7 @@ li img {
 .nav-icon {
   float: left;
   margin-right: 10px;
-  margin-top: 11px; 
+  margin-top: 11px;
 }
 .search form input {
   background: #fffcf6;
