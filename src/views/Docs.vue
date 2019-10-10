@@ -45,7 +45,6 @@
         <hr />
 
         <p class="heading">TABLE OF CONTENTS</p>
-        
 
         <ul>
           <li class v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
@@ -60,28 +59,23 @@
     <div class="container rating">
       <p class="title">Was this page helpful?</p>
 
-      <a @click="rateGood" class="button" id="yesButton" href>Yes</a>
+      <button @click="rateGood" id="yesButton">Yes</button>
 
-      <a
-        @click="rateBad"
-        class="button"
-        id="noButton"
-        href
-        data-toggle="tooltip"
-        data-placement="top"
-        title="Tooltip on top"
-      >No</a>
-
-      <a
-        tabindex="0"
-        class="btn btn-lg btn-danger"
-        role="button"
-        data-toggle="popover"
-        data-trigger="focus"
-        title="Thank you for helping improve Rave's documentation"
-        data-content="If you need help or have any questions, please consider contacting support."
-      >Dismissible popover</a>
+      <button id="noButton" v-popover:comments.top>No</button>
     </div>
+
+    <popover name="comments" width=360 ref="popover">
+      <p>Sorry to hear that you couldn't find what you were looking for ☹.
+        Can you tell us what you would like to see?</p>
+      <form @submit="rateBad">    
+        <div class="form-group">
+          <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+          <textarea v-model="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </popover>
   </div>
 </template>
 
@@ -111,15 +105,14 @@ export default {
 
       pathLinks: [],
       headings: [],
-      content: ""
+      content: "",
+      comment: ""
     };
   },
 
   created() {
     this.displayContent();
     this.getPathLink();
-
-    
   },
   mounted() {
     var headings = document.getElementsByTagName("h2");
@@ -221,10 +214,42 @@ export default {
       event.target.classList.add("active-link");
     },
     rateGood: function() {
+      var ratingObject = {
+        url: "fgrtr"
+      }
       console.log("thumbs up");
+      // this.$http
+      //   .post("http://04ff9f9a.ngrok.io/thumbs-up", ratingObject)
+      //   .then(response => {
+      //     console.log(response);
+      //   })
+      //   .catch(function(error) {
+      //     var errorMessage = error.response.data.message;
+      //     console.log(error);
+
+     
+      //   });
     },
-    rateBad: function() {
-      console.log("thumbs up");
+    rateBad: function(event) {
+      // event.preventDefault();
+      console.log("thumbs down cossa: " + this.comment);
+      console.log(event)
+      // this.$refs.popover.visible = false;
+      // this.$refs.popover.classList.add("hide");
+console.log(this.$refs.popover)
+      var ratingObject = {
+        url: "fgrtr"
+      }
+      // this.$http
+      //   .post("http://04ff9f9a.ngrok.io/thumbs-down", ratingObject)
+      //   .then(response => {
+      //     console.log(response);
+              
+      //   })
+      //   .catch(function(error) {
+      //     var errorMessage = error.response.data.message;
+      //     console.log(error);    
+      //   });
     }
   }
 };
@@ -234,6 +259,7 @@ export default {
 <style scoped>
 .docs {
   background-color: #f2f2f2;
+  padding-bottom: 89px;
 }
 .doc-container {
   display: flex;
@@ -277,8 +303,20 @@ export default {
   justify-content: center;
   margin: 0 7%;
   padding: 3% 0;
-  /* margin-bottom: 89px; */
   margin-top: 82px;
+}
+div[data-popover="comments"] {
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-family: F-Wave-Regular;
+  font-size: 14px;
+  /* line-height: 1.5em; */
+  /* margin: 25px; */
+  text-align: center;
+  /* width: 300px !important; */
+}
+div[data-popover="comments"] button {
+  background-color: #4d5679;
 }
 .left-nav {
   margin-top: 35px;
@@ -319,20 +357,14 @@ li a:hover {
   font-size: 22px;
   line-height: 26px;
   color: #000000;
-}
-.rating a {
-  color: #ffffff;
-  text-decoration-line: none;
-}
-.rating #helptext {
-  position: relative;
-  display: inline-block;
-  /* margin-right: 50px !important; */
+  margin-top: 20px;
+  margin-right: 65px;
 }
 .rating #yesButton {
   background-color: #f5a623;
+  color: #ffffff;
   border-radius: 4px;
-  margin-left: 10px;
+  margin-right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,6 +385,7 @@ li a:hover {
 }
 .rating #noButton {
   background: #4d5679;
+  color: #ffffff;
   border-radius: 4px;
   margin-left: 10px;
   display: flex;
@@ -412,7 +445,9 @@ li a:hover {
   font-weight: 400;
   margin: 0.2em;
 }
-
+.hide {
+  display: none;
+}
 /* markdown styling */
 pre {
   color: yellowgreen !important;

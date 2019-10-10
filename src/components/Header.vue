@@ -37,8 +37,8 @@
                       <!-- customize your hits as usual -->
                     </ais-hits>
                     <div v-else>
-                      There are no hits found for:
-                      <q>{{query}}</q>
+                      There are no hits found for: 
+                      <!-- <q>{{query}}</q> -->
                     </div>
                     <!-- <h1>{{ result.url }}</h1> -->
                     <!-- <a @click="getSearchResult" :href=result.url>{{result}}</a> -->
