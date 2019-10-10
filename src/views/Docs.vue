@@ -13,8 +13,13 @@
         <p>{{this.feature}}</p>
 
         <ul>
-          <li v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link">
+          <li class="menu" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link">
             <a class="menu-item" @click="changeContent">{{ link.title }}</a>
+            <ul v-if="link.subfolderitems">
+              <li class="sub-menu" v-for="link in link.subfolderitems" :key="link">
+                <a class="menu-item" @click="changeContent">{{link.title}}</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -64,13 +69,20 @@
       <button id="noButton" v-popover:comments.top>No</button>
     </div>
 
-    <popover name="comments" width=360 ref="popover">
-      <p>Sorry to hear that you couldn't find what you were looking for ☹.
-        Can you tell us what you would like to see?</p>
-      <form @submit="rateBad">    
+    <popover name="comments" width="360" ref="popover">
+      <p>
+        Sorry to hear that you couldn't find what you were looking for ☹.
+        Can you tell us what you would like to see?
+      </p>
+      <form @submit="rateBad">
         <div class="form-group">
           <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-          <textarea v-model="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea
+            v-model="comment"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -216,7 +228,7 @@ export default {
     rateGood: function() {
       var ratingObject = {
         url: "fgrtr"
-      }
+      };
       console.log("thumbs up");
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-up", ratingObject)
@@ -227,28 +239,27 @@ export default {
       //     var errorMessage = error.response.data.message;
       //     console.log(error);
 
-     
       //   });
     },
     rateBad: function(event) {
       // event.preventDefault();
       console.log("thumbs down cossa: " + this.comment);
-      console.log(event)
+      console.log(event);
       // this.$refs.popover.visible = false;
       // this.$refs.popover.classList.add("hide");
-console.log(this.$refs.popover)
+      console.log(this.$refs.popover);
       var ratingObject = {
         url: "fgrtr"
-      }
+      };
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-down", ratingObject)
       //   .then(response => {
       //     console.log(response);
-              
+
       //   })
       //   .catch(function(error) {
       //     var errorMessage = error.response.data.message;
-      //     console.log(error);    
+      //     console.log(error);
       //   });
     }
   }
@@ -339,9 +350,15 @@ ul {
   font-size: 16px;
   line-height: 20px;
 }
-li {
+.menu {
   margin: 16px 0px;
   list-style-type: none;
+  font-weight: 500;
+}
+.sub-menu {
+  color: #637381;
+  margin: 16px 0px;
+  font-weight: 300;
 }
 li a {
   cursor: pointer;
