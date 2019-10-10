@@ -14,10 +14,10 @@
 
         <ul>
           <li class="menu" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link">
-            <a class="menu-item" @click="changeContent">{{ link.title }}</a>
+            <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
             <ul v-if="link.subfolderitems">
               <li class="sub-menu" v-for="link in link.subfolderitems" :key="link">
-                <a class="menu-item" @click="changeContent">{{link.title}}</a>
+                <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
               </li>
             </ul>
           </li>
@@ -69,7 +69,7 @@
       <button id="noButton" v-popover:comments.top>No</button>
     </div>
 
-    <popover name="comments" width="360" ref="popover">
+    <popover name="comments" width=360 ref="popover">
       <p>
         Sorry to hear that you couldn't find what you were looking for ☹.
         Can you tell us what you would like to see?
@@ -97,7 +97,7 @@ import NeedHelp from "../components/NeedHelp";
 
 export default {
   name: "Docs",
-  props: ["feature"],
+  props: ["feature", "language", "article"],
   components: {
     Header,
     NeedHelp
@@ -123,7 +123,7 @@ export default {
   },
 
   created() {
-    this.displayContent();
+    this.displayContent("");
     this.getPathLink();
   },
   mounted() {
@@ -143,7 +143,7 @@ export default {
     selectSdk: function() {
       // console.log(event);
       // console.log(this.selectedSdk);
-      this.displayContent();
+      this.displayContent("");
     },
     getPathLink: function() {
       // if(this.pathLinks == []) {
@@ -161,22 +161,35 @@ export default {
         });
       // }
     },
-    displayContent: function() {
+    displayContent: function(value) {
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
+      let url;
+      console.log(value)
+      if(value == "") {
+        url = `https://rave-documentation.herokuapp.com/content?path=${this.language}/${this.feature}/${this.article}.md`
+      } else {
+        value = value.substring(value.indexOf("", 1));
+
+        url = `https://rave-documentation.herokuapp.com/content?path=${value}`
+        
+      }
+      console.log(url);
 
       this.$http
         .get(
-          "https://rave-documentation.herokuapp.com/content?path=node/transfers/overview.md"
+          url
         )
         .then(response => {
+          console.log(response);
           var content = this.b64DecodeUnicode(response.data["data"][0].content);
+          // If you're in the browser, the Remarkable class is already available in the window
           var md = new Remarkable({
             html: true
           });
           // this.content = md.render(content);
           this.$refs.content.innerHTML = md.render(content);
-          this.$refs.content.innerHTML;
+          // this.$refs.content.innerHTML;
           var pre = document.getElementsByTagName("code");
           Array.from(pre).forEach(el => {
             el.classList.add("highlight");
@@ -210,9 +223,12 @@ export default {
           .join("")
       );
     },
-    changeContent: function(event) {
+    changeContent(event) {
       event.preventDefault();
-      this.displayContent();
+      
+      
+      let url = event.target.id;
+      this.displayContent(url);
 
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
@@ -222,13 +238,13 @@ export default {
         el.classList.remove("active-link");
       });
 
-      console.log(event.target);
+     
       event.target.classList.add("active-link");
     },
-    rateGood: function() {
-      var ratingObject = {
-        url: "fgrtr"
-      };
+    rateGood() {
+      // var ratingObject = {
+      //   url: "fgrtr"
+      // };
       console.log("thumbs up");
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-up", ratingObject)
@@ -248,9 +264,9 @@ export default {
       // this.$refs.popover.visible = false;
       // this.$refs.popover.classList.add("hide");
       console.log(this.$refs.popover);
-      var ratingObject = {
-        url: "fgrtr"
-      };
+      // var ratingObject = {
+      //   url: "fgrtr"
+      // };
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-down", ratingObject)
       //   .then(response => {

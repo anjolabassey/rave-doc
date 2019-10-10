@@ -18,6 +18,21 @@
           <div class="modal-content">
             <div class="modal-header">
               <!-- <h5 class="modal-title" id="exampleModalScrollableTitle">Search Bar</h5> -->
+              <ais-index
+                app-id="ENGYVJQGI9"
+                api-key="43dd4103be33bc9bb9fabe7e8807896c"
+                index-name="github-pages"
+              >
+                <ais-search-box
+                  placeholder="Search the documentation"
+                  :class-names="{
+                    'ais-input': 'MySearchBox',
+                    'ais-SearchBox-submit': 'search-box__submit',
+                    'ais-SearchBox-reset': 'ais-search-box__reset'
+   
+                  }"
+                ></ais-search-box>
+              </ais-index>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -28,19 +43,10 @@
                 api-key="43dd4103be33bc9bb9fabe7e8807896c"
                 index-name="github-pages"
               >
-                <ais-search-box></ais-search-box>
                 <ais-results>
                   <template slot-scope="{ result }">
-                    <ais-refinement-list attributeName="categories" :sortBy="['title']" />
-
-                    <ais-hits v-if="result.length > 0">
-                      <!-- customize your hits as usual -->
-                    </ais-hits>
-                    <div v-else>
-                      There are no hits found for: 
-                      <!-- <q>{{query}}</q> -->
-                    </div>
-                    <!-- <h1>{{ result.url }}</h1> -->
+                    <p @click="getSearchPage" class="title">{{ result.title}}</p>
+                    <!-- <h6 class="subtitle">{{ result.description }}</h6> -->
                     <!-- <a @click="getSearchResult" :href=result.url>{{result}}</a> -->
                     <!-- <ais-highlight :result="result" attribute-name="title"></ais-highlight> -->
                   </template>
@@ -136,7 +142,10 @@ export default {
       logo: "",
       showSearch: false,
       loggedIn: false,
-      isImage: false
+      isImage: false,
+      MySearchBox: {
+        'color': 'red'
+      }
     };
   },
   mounted() {
@@ -155,25 +164,21 @@ export default {
       this.isImage = false;
     }
 
-    const initials = localStorage.username
+    if (localStorage.username) {
+      const initials = localStorage.username
       .split(" ")
       .map(x => x[0])
       .join("");
     this.username = localStorage.username;
     this.initials = initials;
+    }
+
+    
   },
   // watch() {
 
   // },
   methods: {
-    // Display the search modal when the search bar is clicked
-    displaySearch() {
-      if (this.showSearch == false) {
-        this.showSearch = true;
-      } else {
-        this.showSearch = false;
-      }
-    },
     // Log user out of their profile on the documentation
     logout() {
       this.loggedIn = false;
@@ -184,6 +189,58 @@ export default {
       localStorage.removeItem("username");
       localStorage.removeItem("logo");
       localStorage.removeItem("flwAuthToken");
+    },
+    // Decoding string from github API response
+    b64DecodeUnicode: function(str) {
+      // Going backwards: from bytestream, to percent-encoding, to original string.
+      return decodeURIComponent(
+        atob(str)
+          .split("")
+          .map(function(c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+    },
+    getSearchPage() {
+
+      var headings = document.getElementsByTagName("h2");
+      this.headings = headings;
+
+      this.$http
+        .get(
+          "https://rave-documentation.herokuapp.com/content?path=node/transfers/goinglive.md"
+        )
+        .then(response => {
+          var content = this.b64DecodeUnicode(response.data["data"][0].content);
+          // If you're in the browser, the Remarkable class is already available in the window
+          var md = new Remarkable({
+            html: true
+          });
+          // this.content = md.render(content);
+          this.$refs.content.innerHTML = md.render(content);
+          this.$refs.content.innerHTML;
+          var pre = document.getElementsByTagName("code");
+          Array.from(pre).forEach(el => {
+            el.classList.add("highlight");
+          });
+
+          // const headers = document.querySelectorAll("h2,h3");
+          const linkContent = "  &#9875";
+
+          for (const heading of headings) {
+            const linkIcon = document.createElement("a");
+            linkIcon.setAttribute("href", `#${heading.innerHTML}`);
+            linkIcon.setAttribute("class", "anchor");
+            linkIcon.innerHTML = linkContent;
+            // heading.append(linkIcon);
+          }
+          // console.log(pre);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
     }
   }
 };
@@ -284,6 +341,55 @@ li img {
   position: absolute;
   padding: 0.6rem;
   right: 25px;
+}
+/* style algolia search */
+.ais-search-box__form {
+  /* background-color: red; */
+}
+.search-box {
+  width: 100%;
+  outline: none;
+  font-size: 15px;
+  padding: 7px;
+  box-sizing: border-box;
+  border: 2px solid lightgrey;
+  border-radius: 2px;
+  margin: 20px 0;
+  margin-right: 5%;
+  padding-left: 40px;
+}
+.search-box__submit {
+  background-color: #f5a623;
+}
+.ais-search-box__reset {
+  display: none;
+}
+.ais-clear ais-clear--disabled {
+  display: none;
+}
+.ais-results p {
+  /* background-color: wheat; */
+  color: #637381;
+  cursor: pointer;
+  
+}
+.ais-results p:hover {
+  color: #f5a623;
+  
+}
+.ais-results .title {
+  font-weight: 600;
+}
+.ais-results .title::before {
+  content: url(../assets/img/back.png);
+  width: 20px;
+  /* float: left; */
+  margin-right: 11px;
+  margin-bottom: 3px;
+}
+.ais-description .subtitle {
+  font-weight: 300;
+  font-size: 2px;
 }
 @media all and (max-width: 1024px) {
   .search form input {

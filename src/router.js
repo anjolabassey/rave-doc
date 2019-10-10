@@ -30,7 +30,7 @@ export default new Router({
       props: true
     },
     {
-      path: "/docs/:feature",
+      path: "/docs/:feature/:language/:article",
       name: "docs",
       component: Docs,
       props: true

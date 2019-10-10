@@ -44,7 +44,7 @@
             </router-link>
           </div>
           <div class="col-4">
-            <div class="card" @click="goToDocs('subscriptions')">
+            <div class="card" @click="goToDocs('subscriptions', 'node', 'overview')">
               <img src="../assets/img/subscriptions.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Subscriptions</p>
@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="card" @click="goToDocs('transfers')">
+            <div class="card" @click="goToDocs('transfers', 'node', 'overview')">
               <img src="../assets/img/transfers.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Transfers</p>
@@ -77,7 +77,7 @@
 
         <div class="row">
           <div class="col-4">
-            <div class="card" @click="goToDocs('split-payment')">
+            <div class="card" @click="goToDocs('split-payment', 'node', 'overview')">
               <img src="../assets/img/split-payment.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Split payment</p>
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="card" @click="goToDocs('bills')">
+            <div class="card" @click="goToDocs('bills', 'node', 'overview')">
               <img src="../assets/img/bills.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Bills Payment / Airtime Purchase</p>
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="card" @click="goToDocs('identity')">
+            <div class="card" @click="goToDocs('identity', 'node', 'overview')">
               <img src="../assets/img/identity.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Identity verification</p>
@@ -278,9 +278,9 @@ export default {
     };
   },
   methods: {
-    goToDocs: function(value) {
+    goToDocs: function(feature, language, article) {
       //   alert(`we going`);
-      this.$router.push({ name: "docs", params: { feature: value } });
+      this.$router.push({ name: "docs", params: { feature: feature, language: language, article: article } });
     }
   }
 };
