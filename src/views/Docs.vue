@@ -772,7 +772,7 @@ pre {
   }
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1254px) {
   .left-nav {
     width: 15%;
     margin-right: 20px;

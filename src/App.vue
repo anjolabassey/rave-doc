@@ -3,7 +3,7 @@
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div> -->
+    </div>-->
 
     <router-view />
   </div>
@@ -13,7 +13,6 @@
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-   
 }
 /* fonts */
 @font-face {
@@ -35,5 +34,10 @@
 @font-face {
   font-family: Open-Sans-Semibold;
   src: url(./assets/font/OpenSans-Semibold.ttf);
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 80% !important;
+  }
 }
 </style>

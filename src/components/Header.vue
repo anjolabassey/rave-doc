@@ -259,6 +259,13 @@ export default {
   /* margin-top: 29px; */
 }
 
+@media (min-width: 2250px) {
+.navbar-brand img {
+  margin-right: 676px;
+  /* margin-top: 29px; */
+}
+}
+
 .navbar-light .navbar-nav .nav-link {
   font-family: Open-Sans-Semibold;
   font-style: normal;
