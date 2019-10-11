@@ -25,9 +25,11 @@
       <div class="container features-container">
         <p id="title">What do you need to do ?</p>
         <hr />
-        <div class="row">
-          <router-link to="/Tech">
-            <div class="card">
+        <div class="card-deck">
+         
+          
+            <div class="card firstlink">
+               <router-link class="nolink" to="/Tech">
               <img src="../assets/img/payments.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Payments</p>
@@ -37,10 +39,11 @@
                   is great for Individuals and merchants who don't
                   have developer resources.
                 </p>
-                <a href="#" class>View documentation</a>
+                <a href="#" >View documentation</a>
               </div>
+              </router-link>
             </div>
-          </router-link>
+          
 
           <div class="card" @click="goToDocs('subscriptions', 'node', 'overview')">
             <img src="../assets/img/subscriptions.svg" class="card-img-top" alt="..." />
@@ -71,7 +74,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="card-deck">
           <div class="card" @click="goToDocs('split-payment', 'node', 'overview')">
             <img src="../assets/img/split-payment.svg" class="card-img-top" alt="..." />
             <div class="card-body">
@@ -191,7 +194,7 @@
         Rave APIs to enable amazing ways to innovate.
       </p>
 
-      <div class="row">
+      <div class="card-deck">
         <div class="card">
           <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -382,8 +385,13 @@ export default {
   line-height: 22px;
   font-family: Flutterwave;
 }
-.row a {
-  text-decoration: none;
+.nolink{
+  color: #000000 !important;
+  font-weight: normal !important;
+    
+}
+.nolink a:after {
+  line-height: 24px !important;
 }
 .features-container .card .card-text {
   font-size: 14.4px;
@@ -573,6 +581,7 @@ pre {
 .guides-container .card {
   text-align: justify;
   font-family: Open-Sans;
+  margin-bottom: 20px;
 }
 .guides-container .card-title {
   font-weight: 900;
@@ -599,6 +608,11 @@ pre {
   }
   .subtitle {
     font-size: 20px;
+  }
+}
+@media all and (max-width: 425px) {
+  .jumbotron {
+    margin-bottom: 530px;
   }
 }
 </style>

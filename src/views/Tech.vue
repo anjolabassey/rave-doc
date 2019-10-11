@@ -245,4 +245,21 @@ hr {
     font-size: 16px;
   }
 }
+
+@media all and (max-width: 375px) {
+  .title {
+    font-size: 23px;
+  }
+  .subtitle {
+    font-size: 15px;
+  }
+  .text-center {
+    
+    font-size: 23px;
+  }
+  .tech-section {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+}
 </style>

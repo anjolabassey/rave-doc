@@ -1,6 +1,64 @@
 <template>
   <div class="docs">
     <Header />
+    <div class="subheader container">
+      <div class="row">
+
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >&#9776;</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul>
+              <li
+                class="dropdown-item"
+                v-for="link in pathLinks[this.feature][this.selectedSdk]"
+                :key="link"
+              >
+                <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
+                <ul v-if="link.subfolderitems">
+                  <li class="sub-menu" v-for="link in link.subfolderitems" :key="link">
+                    <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Select Technology</button>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton"
+            v-on:change="selectSdk"
+            :key="selectedSdk"
+          >
+            <a
+              class="dropdown-item"
+              href="#"
+              v-for="item in sdkItems"
+              :key="item.value"
+              :value="item.value"
+            >{{ item.name }}</a>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
 
     <div class="container doc-container">
       <div class="left-nav">
@@ -69,7 +127,7 @@
       <button id="noButton" v-popover:comments.top>No</button>
     </div>
 
-    <popover name="comments" width=360 ref="popover">
+    <popover name="comments" width="360" ref="popover">
       <p>
         Sorry to hear that you couldn't find what you were looking for ☹.
         Can you tell us what you would like to see?
@@ -165,21 +223,18 @@ export default {
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
       let url;
-      console.log(value)
-      if(value == "") {
-        url = `https://rave-documentation.herokuapp.com/content?path=${this.language}/${this.feature}/${this.article}.md`
+      console.log(value);
+      if (value == "") {
+        url = `https://rave-documentation.herokuapp.com/content?path=${this.language}/${this.feature}/${this.article}.md`;
       } else {
         value = value.substring(value.indexOf("", 1));
 
-        url = `https://rave-documentation.herokuapp.com/content?path=${value}`
-        
+        url = `https://rave-documentation.herokuapp.com/content?path=${value}`;
       }
       console.log(url);
 
       this.$http
-        .get(
-          url
-        )
+        .get(url)
         .then(response => {
           console.log(response);
           var content = this.b64DecodeUnicode(response.data["data"][0].content);
@@ -225,8 +280,7 @@ export default {
     },
     changeContent(event) {
       event.preventDefault();
-      
-      
+
       let url = event.target.id;
       this.displayContent(url);
 
@@ -238,7 +292,6 @@ export default {
         el.classList.remove("active-link");
       });
 
-     
       event.target.classList.add("active-link");
     },
     rateGood() {
@@ -288,9 +341,19 @@ export default {
   background-color: #f2f2f2;
   padding-bottom: 89px;
 }
+.subheader {
+  height: 38px;
+  background-color: #fef8ee;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  display: none;
+  padding: 0 50px;
+}
 .doc-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 35px;
 }
 .doc-content {
@@ -328,7 +391,6 @@ export default {
   border-radius: 4px;
   align-items: center;
   justify-content: center;
-  margin: 0 7%;
   padding: 3% 0;
   margin-top: 82px;
 }
@@ -700,6 +762,51 @@ pre {
   .help-container {
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .right-nav {
+    display: none;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .doc-content {
+    width: 90%;
+  }
+  .left-nav {
+    width: 15%;
+    margin-right: 20px;
+  }
+  .right-nav {
+    width: 15%;
+    margin-left: 20px;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .doc-content {
+    width: 100%;
+    padding: 15px 30px;
+  }
+  .left-nav {
+    display: none;
+  }
+  .subheader {
+    display: flex;
+  }
+}
+
+@media all and (max-width: 425px) {
+  .title {
+    font-size: 16px;
+    margin-right: 15px;
+  }
+  .rating #yesButton,
+  .rating #noButton {
+    width: 80px;
+  }
+  .help-container {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 </style>
