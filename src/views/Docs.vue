@@ -374,16 +374,7 @@ export default {
   width: 684px;
   font-family: Open-Sans;
 }
-body .img{
-  width: 100%;
 
-}
-.body {
-  color: yellowgreen!important;
-}
-.body p {
-  color: blue !important;
-}
 .back a {
   /* margin-top: 7px; */
   font-family: SFProDisplay;
@@ -415,10 +406,7 @@ div[data-popover="comments"] {
   border-radius: 4px;
   font-family: F-Wave-Regular;
   font-size: 14px;
-  /* line-height: 1.5em; */
-  /* margin: 25px; */
   text-align: center;
-  /* width: 300px !important; */
 }
 div[data-popover="comments"] button {
   background-color: #4d5679;
