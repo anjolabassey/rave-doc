@@ -28,7 +28,8 @@
                   :class-names="{
                     'ais-input': 'searchBox',
                     'ais-search-box__submit': 'searchBox__submit',
-                    'ais-clear--disabled': 'searchBox__reset'
+                    'ais-clear--disabled': 'searchBox__reset',
+                    'ais-clear': 'searchBox__clear'
    
                   }"
                 ></ais-search-box>
@@ -351,6 +352,9 @@ li img {
   right: 25px;
 }
 /* style algolia search */
+.ais-index {
+  width: 100%;
+}
 .ais-results p {
   /* background-color: wheat; */
   color: #637381;

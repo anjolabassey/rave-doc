@@ -37,7 +37,7 @@
 }
 /* style algolia search */
 .searchBox {
-  width: 250%;
+  width: 100%;
   outline: none;
   font-size: 15px;
   padding: 7px;
@@ -50,15 +50,10 @@
 
 }
 
-.searchBox__submit {
+.searchBox__submit, .searchBox__reset, .searchBox__clear {
   display: none;
 }
-.searchBox__reset {
-  display: none;
-}
-.ais-clear ais-clear--disabled {
-  display: none;
-}
+
 .ais-description .subtitle {
   font-weight: 300;
   font-size: 2px;
