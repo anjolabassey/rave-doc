@@ -3,6 +3,10 @@
     <Header />
     <div class="subheader">
       <div class="row">
+        <div class="back">
+          <img src="../assets/img/back.png" />
+          <router-link to="/">Back</router-link>
+        </div>
 
         <div class="dropdown">
           <button
@@ -81,8 +85,7 @@
           </li>
         </ul>
       </div>
-      <!-- <div class="doc-content" ref="content">
-      </div>-->
+
 
       <div class="doc-content">
         <div class="keys-callout" v-if="showKeys">
@@ -96,7 +99,9 @@
             <span class="keys">{{secretKey}}</span>
           </p>
         </div>
-        <div ref="content"></div>
+        <div v-html="content">
+         
+        </div>
       </div>
 
       <div class="right-nav">
@@ -183,10 +188,11 @@ export default {
   created() {
     this.displayContent("");
     this.getPathLink();
-  },
-  mounted() {
+
     var headings = document.getElementsByTagName("h2");
     this.headings = headings;
+  },
+  mounted() {
 
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
@@ -202,6 +208,8 @@ export default {
       // console.log(event);
       // console.log(this.selectedSdk);
       this.displayContent("");
+      var headings = document.getElementsByTagName("h2");
+      this.headings = headings;
     },
     getPathLink: function() {
       // if(this.pathLinks == []) {
@@ -220,8 +228,6 @@ export default {
       // }
     },
     displayContent: function(value) {
-      var headings = document.getElementsByTagName("h2");
-      this.headings = headings;
       let url;
       console.log(value);
       if (value == "") {
@@ -242,17 +248,16 @@ export default {
           var md = new Remarkable({
             html: true
           });
-          // this.content = md.render(content);
-          this.$refs.content.innerHTML = md.render(content);
-          // this.$refs.content.innerHTML;
+          
+          content = `<div class='body'>${md.render(content)}</div>`
+          this.content = content;
+          // this.$refs.content.innerHTML = md.render(content);
+          
           var pre = document.getElementsByTagName("pre");
           Array.from(pre).forEach(el => {
             el.classList.add("highlight");
           });
-          var pre = document.getElementsByTagName("img");
-          Array.from(pre).forEach(el => {
-            el.classList.add("img");
-          });
+          
 
           // const headers = document.querySelectorAll("h2,h3");
           const linkContent = "  &#9875";
@@ -265,6 +270,9 @@ export default {
             // heading.append(linkIcon);
           }
           // console.log(pre);
+
+          var headings = document.getElementsByTagName("h2");
+      this.headings = headings;
         })
         .catch(function(error) {
           console.log(error);
@@ -287,9 +295,6 @@ export default {
 
       let url = event.target.id;
       this.displayContent(url);
-
-      var headings = document.getElementsByTagName("h2");
-      this.headings = headings;
 
       var menuList = document.getElementsByClassName("menu-item");
       Array.from(menuList).forEach(el => {
@@ -369,7 +374,16 @@ export default {
   width: 684px;
   font-family: Open-Sans;
 }
+body .img{
+  width: 100%;
 
+}
+.body {
+  color: yellowgreen!important;
+}
+.body p {
+  color: blue !important;
+}
 .back a {
   /* margin-top: 7px; */
   font-family: SFProDisplay;
@@ -792,6 +806,11 @@ pre {
   .subheader {
     display: flex;
   }
+  .back {
+  margin-top: 7px;
+ 
+}
+
 }
 
 @media all and (max-width: 425px) {

@@ -284,10 +284,14 @@ export default {
   margin-top: 19px;
 }
 
-.navbar-light .navbar-toggler-icon {
-  /* background-color: #f5a623; */
-  color: red;
+.navbar-nav {
+  text-align: right;
+   background-color: #fafafa;
+  margin-left: 70%;
+  padding: 10px;
+  border-radius: 4px;
 }
+
 .search {
   display: inline-flex;
   position: relative;
