@@ -53,7 +53,7 @@ export default {
       password: "",
       flwAuthToken: "",
       buttonText: "Login",
-      errorText: "error Text",
+      errorText: "error Text"
     };
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
       };
       let prodRequestObject = {
         merchant_status: "prod"
-      }
+      };
 
       this.$http
         .post("https://api.ravepay.co/login", loginRequestObject, {
@@ -88,50 +88,67 @@ export default {
             "username",
             `${response.data.data.user.first_name} ${response.data.data.user.last_name}`
           );
-          localStorage.setItem("logo", response.data.data.company.business_logo);
+          localStorage.setItem(
+            "logo",
+            response.data.data.company.business_logo
+          );
           localStorage.setItem("loggedIn", true);
 
           return this.$http.post(
-            "https://api.ravepay.co/merchant/accounts/update", testRequestObject, {
+            "https://api.ravepay.co/merchant/accounts/update",
+            testRequestObject,
+            {
               headers: {
                 "flw-auth-token": localStorage.getItem("flwAuthToken"),
-                "alt_mode_auth": 1,
+                alt_mode_auth: 1,
                 "v3-xapp-id": 1
               }
             }
           );
         })
         .then(response => {
-          return this.$http.get("https://api.ravepay.co/v2/merchantkeys?include_v1_keys=1", {
-            headers: {
-              "flw-auth-token": localStorage.getItem("flwAuthToken"),
-              "v3-xapp-id": 1
-            }
-          })
-        }).then(response => {
-          localStorage.setItem(
-            "publicKey", response.data.data.v1keys.public_key
-          );
-          localStorage.setItem(
-            "secretKey", response.data.data.v1keys.secret_key
-          );
-
-          return this.$http.post(
-            "https://api.ravepay.co/merchant/accounts/update", prodRequestObject, {
+          return this.$http.get(
+            "https://api.ravepay.co/v2/merchantkeys?include_v1_keys=1",
+            {
               headers: {
                 "flw-auth-token": localStorage.getItem("flwAuthToken"),
-                "alt_mode_auth": 1,
                 "v3-xapp-id": 1
               }
             }
           );
-          
-        }).then(response => {
+        })
+        .then(response => {
+          localStorage.setItem(
+            "publicKey",
+            response.data.data.v1keys.public_key
+          );
+          localStorage.setItem(
+            "secretKey",
+            response.data.data.v1keys.secret_key
+          );
+
+          return this.$http.post(
+            "https://api.ravepay.co/merchant/accounts/update",
+            prodRequestObject,
+            {
+              headers: {
+                "flw-auth-token": localStorage.getItem("flwAuthToken"),
+                alt_mode_auth: 1,
+                "v3-xapp-id": 1
+              }
+            }
+          );
+        })
+        .then(response => {
           console.log(response.statusText);
 
           vm.loggedIn = true;
           this.buttonText = "Logged In";
-          self.$router.push('/home');
+          // self.$router.push("/home");
+          this.$router.push({
+            name: "docs",
+            params: { feature: feature, language: language, article: article }
+          });
           document.getElementById("loginButton").disabled = false;
         })
         .catch(function(error) {

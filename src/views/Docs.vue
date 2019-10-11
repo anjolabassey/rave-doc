@@ -1,7 +1,7 @@
 <template>
   <div class="docs">
     <Header />
-    <div class="subheader container">
+    <div class="subheader">
       <div class="row">
 
         <div class="dropdown">
@@ -245,9 +245,13 @@ export default {
           // this.content = md.render(content);
           this.$refs.content.innerHTML = md.render(content);
           // this.$refs.content.innerHTML;
-          var pre = document.getElementsByTagName("code");
+          var pre = document.getElementsByTagName("pre");
           Array.from(pre).forEach(el => {
             el.classList.add("highlight");
+          });
+          var pre = document.getElementsByTagName("img");
+          Array.from(pre).forEach(el => {
+            el.classList.add("img");
           });
 
           // const headers = document.querySelectorAll("h2,h3");
@@ -365,9 +369,7 @@ export default {
   width: 684px;
   font-family: Open-Sans;
 }
-.doc-content img {
-  width: 100%;
-}
+
 .back a {
   /* margin-top: 7px; */
   font-family: SFProDisplay;
@@ -769,9 +771,6 @@ pre {
 }
 
 @media all and (max-width: 1024px) {
-  .doc-content {
-    width: 90%;
-  }
   .left-nav {
     width: 15%;
     margin-right: 20px;
