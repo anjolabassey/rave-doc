@@ -26,9 +26,9 @@
                 <ais-search-box
                   placeholder="Search the documentation"
                   :class-names="{
-                    'ais-input': 'MySearchBox',
-                    'ais-SearchBox-submit': 'search-box__submit',
-                    'ais-SearchBox-reset': 'ais-search-box__reset'
+                    'ais-input': 'searchBox',
+                    'ais-search-box__submit': 'searchBox__submit',
+                    'ais-clear--disabled': 'searchBox__reset'
    
                   }"
                 ></ais-search-box>
@@ -142,10 +142,7 @@ export default {
       logo: "",
       showSearch: false,
       loggedIn: false,
-      isImage: false,
-      MySearchBox: {
-        'color': 'red'
-      }
+      isImage: false
     };
   },
   mounted() {
@@ -354,30 +351,6 @@ li img {
   right: 25px;
 }
 /* style algolia search */
-.ais-search-box__form {
-  /* background-color: red; */
-}
-.search-box {
-  width: 100%;
-  outline: none;
-  font-size: 15px;
-  padding: 7px;
-  box-sizing: border-box;
-  border: 2px solid lightgrey;
-  border-radius: 2px;
-  margin: 20px 0;
-  margin-right: 5%;
-  padding-left: 40px;
-}
-.search-box__submit {
-  background-color: #f5a623;
-}
-.ais-search-box__reset {
-  display: none;
-}
-.ais-clear ais-clear--disabled {
-  display: none;
-}
 .ais-results p {
   /* background-color: wheat; */
   color: #637381;
@@ -398,10 +371,7 @@ li img {
   margin-right: 11px;
   margin-bottom: 3px;
 }
-.ais-description .subtitle {
-  font-weight: 300;
-  font-size: 2px;
-}
+
 @media all and (max-width: 1024px) {
   .search form input {
     width: 300px;
