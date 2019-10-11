@@ -13,11 +13,11 @@
         <div class="row button-row">
           <div class="col-6 text-right login-btn">
             <!-- <button @click="bhj" class="btn-primary" id="login">Get API Keys</button> -->
-             <router-link :to="{ name: 'login' }" target="_blank" >Get API Keys</router-link>
+            <router-link :to="{ name: 'login' }" target="_blank">Get API Keys</router-link>
           </div>
           <div class="col-6 text-left help-btn">
             <!-- <a class="btn-primary" id="slack" href="#">Get help</a> -->
-            
+
             <a href="https://support.flutterwave.com" target="_blank">Get Help</a>
           </div>
         </div>
@@ -26,28 +26,11 @@
         <p id="title">What do you need to do ?</p>
         <hr />
         <div class="row">
-          <div class="col-4">
-            <router-link to="/Tech">
-              <div class="card">
-                <img src="../assets/img/payments.svg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-title">Payments</p>
-                  <p class="card-text">
-                    Payment links allow merchants accept payments
-                    on their site without the need to integrate. This
-                    is great for Individuals and merchants who don't
-                    have developer resources.
-                  </p>
-                  <a href="#" class>View documentation</a>
-                </div>
-              </div>
-            </router-link>
-          </div>
-          <div class="col-4">
-            <div class="card" @click="goToDocs('subscriptions', 'node', 'overview')">
-              <img src="../assets/img/subscriptions.svg" class="card-img-top" alt="..." />
+          <router-link to="/Tech">
+            <div class="card">
+              <img src="../assets/img/payments.svg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <p class="card-title">Subscriptions</p>
+                <p class="card-title">Payments</p>
                 <p class="card-text">
                   Payment links allow merchants accept payments
                   on their site without the need to integrate. This
@@ -57,67 +40,81 @@
                 <a href="#" class>View documentation</a>
               </div>
             </div>
+          </router-link>
+
+          <div class="card" @click="goToDocs('subscriptions', 'node', 'overview')">
+            <img src="../assets/img/subscriptions.svg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-title">Subscriptions</p>
+              <p class="card-text">
+                Payment links allow merchants accept payments
+                on their site without the need to integrate. This
+                is great for Individuals and merchants who don't
+                have developer resources.
+              </p>
+              <a href="#" class>View documentation</a>
+            </div>
           </div>
-          <div class="col-4">
-            <div class="card" @click="goToDocs('transfers', 'node', 'overview')">
-              <img src="../assets/img/transfers.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <p class="card-title">Transfers</p>
-                <p class="card-text">
-                  Payment links allow merchants accept payments
-                  on their site without the need to integrate. This
-                  is great for Individuals and merchants who don't
-                  have developer resources.
-                </p>
-                <a href="#" class>View documentation</a>
-              </div>
+
+          <div class="card" @click="goToDocs('transfers', 'node', 'overview')">
+            <img src="../assets/img/transfers.svg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-title">Transfers</p>
+              <p class="card-text">
+                Payment links allow merchants accept payments
+                on their site without the need to integrate. This
+                is great for Individuals and merchants who don't
+                have developer resources.
+              </p>
+              <a href="#" class>View documentation</a>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-4">
-            <div class="card" @click="goToDocs('split-payment', 'node', 'overview')">
-              <img src="../assets/img/split-payment.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <p class="card-title">Split payment</p>
-                <p class="card-text">
-                  Rave's split payment feature allows you split a
-                  transaction between two (2) or more accounts
-                  and collect fees on the transaction.
-                </p>
-                <a href="#" class>View documentation</a>
-              </div>
+          <div class="card" @click="goToDocs('split-payment', 'node', 'overview')">
+            <img src="../assets/img/split-payment.svg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-title">Split payment</p>
+              <p class="card-text">
+                Rave's split payment feature allows you split a
+                transaction between two (2) or more accounts
+                and collect fees on the transaction.
+              </p>
+              <a href="#" class>View documentation</a>
             </div>
           </div>
-          <div class="col-4">
-            <div class="card" @click="goToDocs('bills', 'node', 'overview')">
-              <img src="../assets/img/bills.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <p class="card-title">Bills Payment / Airtime Purchase</p>
-                <p class="card-text">
-                  Payment links allow merchants accept payments
-                  on their site without the need to integrate. This
-                  is great for Individuals and merchants who don't
-                  have developer resources.
-                </p>
-                <a href="#" class>View documentation</a>
-              </div>
+
+          <div class="card" @click="goToDocs('bills', 'node', 'overview')">
+            <img src="../assets/img/bills.svg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-title">Bills Payment / Airtime Purchase</p>
+              <p class="card-text">
+                Payment links allow merchants accept payments
+                on their site without the need to integrate. This
+                is great for Individuals and merchants who don't
+                have developer resources.
+              </p>
+              <a href="#" class>View documentation</a>
             </div>
           </div>
-          <div class="col-4">
-            <div class="card" @click="goToDocs('identity', 'node', 'overview')">
-              <img src="../assets/img/identity.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <p class="card-title">Identity verification</p>
-                <p class="card-text">
-                  Rave allows you to verify customer's BVN
-                  and perform KYC.
-                </p>
-                <a href="#" class>View documentation</a>
-              </div>
+
+          <div class="card" @click="goToDocs('identity', 'node', 'overview')">
+            <img src="../assets/img/identity.svg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-title">Identity verification</p>
+              <p class="card-text">
+                 Rave allows you to verify customer's BVN
+                and perform KYC.  It allows you verify BVN supplied by a customer and can also be used for customer KYC methods
+                
+              </p>
+              <a href="#" class>View documentation</a>
             </div>
           </div>
+
+
+
+         
         </div>
       </div>
     </div>
@@ -195,61 +192,57 @@
       </p>
 
       <div class="row">
-        <div class="col-4">
-          <div class="card">
-            <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-title">
-                Building a complete checkout
-                system using Rave, Vuejs & Nodejs
-              </p>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet, consecte
-                adipiscing elit. Donec sollicitudin arcu
-                at elementum velit accumen pulvinar.
-              </p>
-            </div>
-            <div class="footer">
-              <a href="#" class>Read more</a>
-            </div>
+        <div class="card">
+          <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-title">
+              Building a complete checkout
+              system using Rave, Vuejs & Nodejs
+            </p>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet, consecte
+              adipiscing elit. Donec sollicitudin arcu
+              at elementum velit accumen pulvinar.
+            </p>
+          </div>
+          <div class="footer">
+            <a href="#" class>Read more</a>
           </div>
         </div>
-        <div class="col-4">
-          <div class="card">
-            <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-title">
-                Building a complete checkout
-                system using Rave, Vuejs & Nodejs
-              </p>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet, consecte
-                adipiscing elit. Donec sollicitudin arcu
-                at elementum velit accumen pulvinar.
-              </p>
-            </div>
-            <div class="footer">
-              <a href="#" class>Read more</a>
-            </div>
+
+        <div class="card">
+          <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-title">
+              Building a complete checkout
+              system using Rave, Vuejs & Nodejs
+            </p>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet, consecte
+              adipiscing elit. Donec sollicitudin arcu
+              at elementum velit accumen pulvinar.
+            </p>
+          </div>
+          <div class="footer">
+            <a href="#" class>Read more</a>
           </div>
         </div>
-        <div class="col-4">
-          <div class="card">
-            <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-title">
-                Building a complete checkout
-                system using Rave, Vuejs & Nodejs
-              </p>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet, consecte
-                adipiscing elit. Donec sollicitudin arcu
-                at elementum velit accumen pulvinar.
-              </p>
-            </div>
-            <div class="footer">
-              <a href="#" class>Read more</a>
-            </div>
+
+        <div class="card">
+          <img src="../assets/img/learning-vue-step-by-step.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-title">
+              Building a complete checkout
+              system using Rave, Vuejs & Nodejs
+            </p>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet, consecte
+              adipiscing elit. Donec sollicitudin arcu
+              at elementum velit accumen pulvinar.
+            </p>
+          </div>
+          <div class="footer">
+            <a href="#" class>Read more</a>
           </div>
         </div>
       </div>
@@ -280,7 +273,10 @@ export default {
   methods: {
     goToDocs: function(feature, language, article) {
       //   alert(`we going`);
-      this.$router.push({ name: "docs", params: { feature: feature, language: language, article: article } });
+      this.$router.push({
+        name: "docs",
+        params: { feature: feature, language: language, article: article }
+      });
     }
   }
 };

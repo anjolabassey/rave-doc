@@ -428,4 +428,21 @@ li img {
     padding: 21px 30px;
   }
 }
+
+@media all and (max-width: 375px) {
+  .search form img {
+  position: absolute;
+  right: 2px;
+}
+  .search form input {
+    width: 100px;
+  }
+  .navbar-brand img {
+    /* margin-right: 10px; */
+    width: 100px;
+  }
+  .navbar {
+    padding: 21px 30px;
+  }
+}
 </style>
