@@ -1,16 +1,16 @@
 <template>
   <div class="docs">
     <Header />
-    <div class="subheader">
-      <div class="row">
-        <div class="back">
+      <div class="subheader d-flex justify-content-between">
+        <!-- <div class="back">
           <img src="../assets/img/back.png" />
           <router-link to="/">Back</router-link>
-        </div>
+        </div>-->
 
+      
         <div class="dropdown">
           <button
-            class="btn dropdown-toggle"
+            class="btn"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -19,14 +19,10 @@
           >&#9776;</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <ul>
-              <li
-                class="dropdown-item"
-                v-for="link in pathLinks[this.feature][this.selectedSdk]"
-                :key="link"
-              >
+              <li class="dropdown-item" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link.title">
                 <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
                 <ul v-if="link.subfolderitems">
-                  <li class="sub-menu" v-for="link in link.subfolderitems" :key="link">
+                  <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
                     <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
                   </li>
                 </ul>
@@ -34,34 +30,32 @@
             </ul>
           </div>
         </div>
+      
 
-        <div class="dropdown">
-          <button
-            class="btn dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >Select Technology</button>
-          <div
-            class="dropdown-menu"
-            aria-labelledby="dropdownMenuButton"
-            v-on:change="selectSdk"
-            :key="selectedSdk"
-          >
-            <a
-              class="dropdown-item"
-              href="#"
-              v-for="item in sdkItems"
-              :key="item.value"
-              :value="item.value"
-            >{{ item.name }}</a>
+      
+          <div class="dropdown">
+            <button
+              class="btn dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >Select Technology</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-on:change="selectSdk">
+              <a
+                class="dropdown-item"
+                href="#"
+                v-for="item in sdkItems"
+                :value="item.value"
+                :key="item.name"
+              >{{ item.value }}</a>
+            </div>
           </div>
-        </div>
-
+     
         
-      </div>
+
+      
     </div>
 
     <div class="container doc-container">
@@ -72,20 +66,22 @@
         </div>
 
         <p class="heading">{{this.selectedSdk}}</p>
-        <p>{{this.feature}}</p>
+        <select class="custom-select select" v-on:change="selectSdk" v-model="selectedSdk">
+          <option selected>Select Technology</option>
+          <option v-for="item in sdkItems" :value="item.value" :key="item.value">{{ item.name }}</option>
+        </select>
 
         <ul>
-          <li class="menu" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link">
+          <li class="menu" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link.title">
             <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
             <ul v-if="link.subfolderitems">
-              <li class="sub-menu" v-for="link in link.subfolderitems" :key="link">
+              <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
                 <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-
 
       <div class="doc-content">
         <div class="keys-callout" v-if="showKeys">
@@ -99,15 +95,13 @@
             <span class="keys">{{secretKey}}</span>
           </p>
         </div>
-        <div v-html="content">
-         
-        </div>
+        <div v-html="content"></div>
       </div>
 
       <div class="right-nav">
         <select class="custom-select" v-on:change="selectSdk" v-model="selectedSdk">
           <option selected>Select Technology</option>
-          <option v-for="item in sdkItems" :key="item.value" :value="item.value">{{ item.name }}</option>
+          <option v-for="item in sdkItems" :value="item.value">{{ item.name }}</option>
         </select>
 
         <hr />
@@ -115,7 +109,7 @@
         <p class="heading">TABLE OF CONTENTS</p>
 
         <ul>
-          <li class v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
+          <li class v-for="item in headings">{{ item.innerText }}</li>
         </ul>
       </div>
     </div>
@@ -132,7 +126,7 @@
       <button id="noButton" v-popover:comments.top>No</button>
     </div>
 
-    <popover name="comments" width="360" ref="popover">
+    <popover name="comments" ref="popover">
       <p>
         Sorry to hear that you couldn't find what you were looking for ☹.
         Can you tell us what you would like to see?
@@ -188,12 +182,9 @@ export default {
   created() {
     this.displayContent("");
     this.getPathLink();
-
-    var headings = document.getElementsByTagName("h2");
-    this.headings = headings;
   },
   mounted() {
-
+    this.appendCopyButtons();
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
     }
@@ -204,14 +195,18 @@ export default {
     }
   },
   methods: {
-    selectSdk: function() {
-      // console.log(event);
-      // console.log(this.selectedSdk);
+    // Switch content based on selected sdk
+    selectSdk() {
       this.displayContent("");
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
     },
-    getPathLink: function() {
+    // Append copy buttons to the pre tags
+    appendCopyButtons() {
+      var pres = document.getElementsByTagName("h2");
+    },
+    // Get the path links
+    getPathLink() {
       // if(this.pathLinks == []) {
       this.$http
         .get(
@@ -227,9 +222,11 @@ export default {
         });
       // }
     },
+    // Fetch and display the content from github
     displayContent: function(value) {
+      let vm = this;
       let url;
-      console.log(value);
+      // console.log(value);
       if (value == "") {
         url = `https://rave-documentation.herokuapp.com/content?path=${this.language}/${this.feature}/${this.article}.md`;
       } else {
@@ -237,42 +234,37 @@ export default {
 
         url = `https://rave-documentation.herokuapp.com/content?path=${value}`;
       }
-      console.log(url);
+      // console.log(url);
 
       this.$http
         .get(url)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           var content = this.b64DecodeUnicode(response.data["data"][0].content);
           // If you're in the browser, the Remarkable class is already available in the window
           var md = new Remarkable({
             html: true
           });
-          
-          content = `<div class='body'>${md.render(content)}</div>`
-          this.content = content;
+
+          content = md.render(content);
+          vm.content = content;
+
           // this.$refs.content.innerHTML = md.render(content);
-          
-          var pre = document.getElementsByTagName("pre");
-          Array.from(pre).forEach(el => {
-            el.classList.add("highlight");
-          });
-          
 
           // const headers = document.querySelectorAll("h2,h3");
-          const linkContent = "  &#9875";
+          // const linkContent = "  &#9875";
 
-          for (const heading of headings) {
-            const linkIcon = document.createElement("a");
-            linkIcon.setAttribute("href", `#${heading.innerHTML}`);
-            linkIcon.setAttribute("class", "anchor");
-            linkIcon.innerHTML = linkContent;
-            // heading.append(linkIcon);
-          }
+          // for (const heading of headings) {
+          //   const linkIcon = document.createElement("a");
+          //   linkIcon.setAttribute("href", `#${heading.innerHTML}`);
+          //   linkIcon.setAttribute("class", "anchor");
+          //   linkIcon.innerHTML = linkContent;
+          //   // heading.append(linkIcon);
+          // }
           // console.log(pre);
 
-          var headings = document.getElementsByTagName("h2");
-      this.headings = headings;
+          // var headings = document.getElementsByTagName("h2");
+          // this.headings = headings;
         })
         .catch(function(error) {
           console.log(error);
@@ -280,7 +272,6 @@ export default {
     },
     // Decoding string from github API response
     b64DecodeUnicode: function(str) {
-      // Going backwards: from bytestream, to percent-encoding, to original string.
       return decodeURIComponent(
         atob(str)
           .split("")
@@ -290,6 +281,7 @@ export default {
           .join("")
       );
     },
+    // Change the content based on the lick clicked in the navigation
     changeContent(event) {
       event.preventDefault();
 
@@ -303,6 +295,7 @@ export default {
 
       event.target.classList.add("active-link");
     },
+    // Give page good rating
     rateGood() {
       // var ratingObject = {
       //   url: "fgrtr"
@@ -319,13 +312,13 @@ export default {
 
       //   });
     },
+    // Give page bad rating
     rateBad: function(event) {
-      // event.preventDefault();
-      console.log("thumbs down cossa: " + this.comment);
-      console.log(event);
-      // this.$refs.popover.visible = false;
-      // this.$refs.popover.classList.add("hide");
-      console.log(this.$refs.popover);
+      event.preventDefault();
+      // console.log("thumbs down cossa: " + this.comment);
+
+      this.$refs.popover.visible = false;
+
       // var ratingObject = {
       //   url: "fgrtr"
       // };
@@ -351,14 +344,7 @@ export default {
   padding-bottom: 89px;
 }
 .subheader {
-  height: 38px;
-  background-color: #fef8ee;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   display: none;
-  padding: 0 50px;
 }
 .doc-container {
   display: flex;
@@ -373,6 +359,10 @@ export default {
   min-height: 1021px;
   width: 684px;
   font-family: Open-Sans;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .back a {
@@ -407,6 +397,8 @@ div[data-popover="comments"] {
   font-family: F-Wave-Regular;
   font-size: 14px;
   text-align: center;
+  width: 360px !important;
+  top: 2900px !important;
 }
 div[data-popover="comments"] button {
   background-color: #4d5679;
@@ -547,7 +539,9 @@ li a:hover {
 .hide {
   display: none;
 }
-
+.select {
+  display: none;
+}
 @media all and (max-width: 768px) {
   .help-container {
     padding-left: 20px;
@@ -564,12 +558,23 @@ li a:hover {
     margin-right: 20px;
   }
   .right-nav {
-    width: 15%;
-    margin-left: 20px;
+    display: none;
+  }
+  .select {
+    display: inline-block;
+  }
+  .doc-content {
+    width: 90%;
+    padding: 15px 30px;
+  }
+}
+@media (max-width: 800px) and (max-width: 1254px) {
+  .select {
+    display: inline-block;
   }
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
   .doc-content {
     width: 100%;
     padding: 15px 30px;
@@ -577,14 +582,16 @@ li a:hover {
   .left-nav {
     display: none;
   }
+
   .subheader {
-    display: flex;
+    display: inline;
+    background-color: #fef8ee;
+    padding: 0 45px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   }
   .back {
-  margin-top: 7px;
- 
-}
-
+    margin-top: 7px;
+  }
 }
 
 @media all and (max-width: 425px) {

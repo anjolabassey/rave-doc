@@ -41,26 +41,59 @@
   outline: none;
   font-size: 15px;
   padding: 7px;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   /* box-sizing: border-box; */
-  border: 2px solid lightgrey;
+  border: none;
+  border-bottom: 2px solid lightgrey;
   border-radius: 4px;
- 
-
-
+  
+}
+.color {
+  color: rebeccapurple;
 }
 
-.searchBox__submit, .searchBox__reset, .searchBox__clear {
+.searchBox__submit,
+.searchBox__reset,
+.searchBox__clear {
   display: none;
 }
 
+.ais-results {
+  margin-top: 20px;
+}
 .ais-description .subtitle {
   font-weight: 300;
   font-size: 2px;
 }
+.panel {
+  color: red;
+}
+.panelBody {
+  background-color: #009926;
+}
+.panelBody h4 {
+  font-size: 11px;
+  line-height: 160%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #637381;
+  margin-top: 0px;
+  padding-top: 0px;
+}
 
 /* style content from github */
-pre{
+.notes {
+  background: #f2f2f2;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  border: 1px solid #c4cdd5;
+  box-sizing: border-box;
+  border-radius: 0px 3px 3px 0px;
+  border-left: 5px solid #b8e986;
+  padding: 16px 24px;
+}
+
+pre {
   page-break-inside: avoid;
   font-family: monospace;
   font-size: 12px;

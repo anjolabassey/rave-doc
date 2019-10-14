@@ -15,14 +15,12 @@
         aria-hidden="true"
       >
         <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <!-- <h5 class="modal-title" id="exampleModalScrollableTitle">Search Bar</h5> -->
-              <ais-index
-                app-id="ENGYVJQGI9"
-                api-key="43dd4103be33bc9bb9fabe7e8807896c"
-                index-name="github-pages"
-              >
+          <div id="exampleModal" class="modal-content">
+            <div id="modalBody" class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <ais-index :search-client="searchClient" index-name="github-pages">
                 <ais-search-box
                   placeholder="Search the documentation"
                   :class-names="{
@@ -33,25 +31,15 @@
    
                   }"
                 ></ais-search-box>
-              </ais-index>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ais-index
-                app-id="ENGYVJQGI9"
-                api-key="43dd4103be33bc9bb9fabe7e8807896c"
-                index-name="github-pages"
-              >
                 <ais-results>
                   <template slot-scope="{ result }">
-                    <p @click="getSearchPage" class="title">{{ result.title}}</p>
-                    <!-- <h6 class="subtitle">{{ result.description }}</h6> -->
-                    <!-- <a @click="getSearchResult" :href=result.url>{{result}}</a> -->
-                    <!-- <ais-highlight :result="result" attribute-name="title"></ais-highlight> -->
+                    <p class="title">{{ result.title}}</p>
+                    <!-- <p class="subtitle">{{ result.description }}</p> -->
+                    <!-- <a>{{ result.title }}</a> -->
                   </template>
                 </ais-results>
+
+                
               </ais-index>
             </div>
           </div>
@@ -123,19 +111,14 @@
         </ul>
       </div>
     </nav>
-
-    <Search v-if="showSearch" />
   </div>
 </template>
 
 <script>
-import Search from "./Search";
+import algoliasearch from "algoliasearch/lite";
 
 export default {
   name: "Header",
-  components: {
-    Search
-  },
   data() {
     return {
       username: "",
@@ -143,7 +126,11 @@ export default {
       logo: "",
       showSearch: false,
       loggedIn: false,
-      isImage: false
+      isImage: false,
+      searchClient: algoliasearch(
+        "ENGYVJQGI9",
+        "f19616439cac1e58e1a8f7f0a7e4764a"
+      )
     };
   },
   mounted() {
@@ -164,18 +151,13 @@ export default {
 
     if (localStorage.username) {
       const initials = localStorage.username
-      .split(" ")
-      .map(x => x[0])
-      .join("");
-    this.username = localStorage.username;
-    this.initials = initials;
+        .split(" ")
+        .map(x => x[0])
+        .join("");
+      this.username = localStorage.username;
+      this.initials = initials;
     }
-
-    
   },
-  // watch() {
-
-  // },
   methods: {
     // Log user out of their profile on the documentation
     logout() {
@@ -190,7 +172,6 @@ export default {
     },
     // Decoding string from github API response
     b64DecodeUnicode: function(str) {
-      // Going backwards: from bytestream, to percent-encoding, to original string.
       return decodeURIComponent(
         atob(str)
           .split("")
@@ -200,8 +181,8 @@ export default {
           .join("")
       );
     },
+    // Show the search modal when the search bar is clicked
     getSearchPage() {
-
       var headings = document.getElementsByTagName("h2");
       this.headings = headings;
 
@@ -223,7 +204,6 @@ export default {
             el.classList.add("highlight");
           });
 
-          // const headers = document.querySelectorAll("h2,h3");
           const linkContent = "  &#9875";
 
           for (const heading of headings) {
@@ -238,7 +218,6 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-
     }
   }
 };
@@ -258,10 +237,10 @@ export default {
 }
 
 @media (min-width: 2250px) {
-.navbar-brand img {
-  margin-right: 676px;
-  /* margin-top: 29px; */
-}
+  .navbar-brand img {
+    margin-right: 676px;
+    /* margin-top: 29px; */
+  }
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -291,7 +270,7 @@ export default {
 
 .navbar-nav {
   text-align: right;
-   /* background-color: #fafafa; */
+  /* background-color: #fafafa; */
   margin-left: 70%;
   padding: 10px;
   border-radius: 4px;
@@ -359,11 +338,9 @@ li img {
   /* background-color: wheat; */
   color: #637381;
   cursor: pointer;
-  
 }
 .ais-results p:hover {
   color: #f5a623;
-  
 }
 .ais-results .title {
   font-weight: 600;
@@ -376,7 +353,14 @@ li img {
   margin-bottom: 3px;
 }
 
-@media all and (max-width: 1024px) {
+.ais-results .subtitle {
+  font-weight: 300px !important;
+  margin-left: 15px;
+  color: #637381;
+  cursor: pointer;
+}
+
+@media all and (max-width: 1320px) {
   .search form input {
     width: 300px;
   }
@@ -387,23 +371,29 @@ li img {
     padding: 21px 116px;
   }
 }
-@media all and (max-width: 768px) {
+
+@media all and (max-width: 992px) {
   .search form input {
     width: 250px;
   }
   .navbar-brand img {
-    margin-right: 50px;
+    margin-right: 20px;
   }
   .navbar {
     padding: 21px 50px;
   }
+  .doc-content {
+    width: 500px;
+    padding: 15px 30px;
+  }
 }
+
 @media all and (max-width: 425px) {
   .search {
     height: 40px;
   }
   .search form input {
-    width: 150px;
+    width: 130px;
   }
   .navbar-brand img {
     margin-right: 10px;
@@ -416,9 +406,9 @@ li img {
 
 @media all and (max-width: 375px) {
   .search form img {
-  position: absolute;
-  right: 2px;
-}
+    position: absolute;
+    right: 2px;
+  }
   .search form input {
     width: 100px;
   }
