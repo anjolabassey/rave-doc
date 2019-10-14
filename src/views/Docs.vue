@@ -1,61 +1,58 @@
 <template>
   <div class="docs">
     <Header />
-      <div class="subheader d-flex justify-content-between">
-        <!-- <div class="back">
+    <div class="subheader d-flex justify-content-between">
+      <!-- <div class="back">
           <img src="../assets/img/back.png" />
           <router-link to="/">Back</router-link>
-        </div>-->
+      </div>-->
 
-      
-        <div class="dropdown">
-          <button
-            class="btn"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >&#9776;</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <ul>
-              <li class="dropdown-item" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link.title">
-                <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
-                <ul v-if="link.subfolderitems">
-                  <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
-                    <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+      <div class="dropdown">
+        <button
+          class="btn"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >&#9776;</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <ul>
+            <li
+              class="dropdown-item"
+              v-for="link in pathLinks[this.feature][this.selectedSdk]"
+              :key="link.title"
+            >
+              <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
+              <ul v-if="link.subfolderitems">
+                <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
+                  <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      
+      </div>
 
-      
-          <div class="dropdown">
-            <button
-              class="btn dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >Select Technology</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-on:change="selectSdk">
-              <a
-                class="dropdown-item"
-                href="#"
-                v-for="item in sdkItems"
-                :value="item.value"
-                :key="item.name"
-              >{{ item.value }}</a>
-            </div>
-          </div>
-     
-        
-
-      
+      <div class="dropdown">
+        <button
+          class="btn dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >Select Technology</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-on:change="selectSdk">
+          <a
+            class="dropdown-item"
+            href="#"
+            v-for="item in sdkItems"
+            :value="item.value"
+            :key="item.name"
+          >{{ item.value }}</a>
+        </div>
+      </div>
     </div>
 
     <div class="container doc-container">
@@ -72,7 +69,11 @@
         </select>
 
         <ul>
-          <li class="menu" v-for="link in pathLinks[this.feature][this.selectedSdk]" :key="link.title">
+          <li
+            class="menu"
+            v-for="link in pathLinks[this.feature][this.selectedSdk]"
+            :key="link.title"
+          >
             <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
             <ul v-if="link.subfolderitems">
               <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
@@ -101,7 +102,7 @@
       <div class="right-nav">
         <select class="custom-select" v-on:change="selectSdk" v-model="selectedSdk">
           <option selected>Select Technology</option>
-          <option v-for="item in sdkItems" :value="item.value">{{ item.name }}</option>
+          <option v-for="item in sdkItems" :value="item.value" :key="item.name">{{ item.name }}</option>
         </select>
 
         <hr />
@@ -109,7 +110,7 @@
         <p class="heading">TABLE OF CONTENTS</p>
 
         <ul>
-          <li class v-for="item in headings">{{ item.innerText }}</li>
+          <li class="menu" v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
         </ul>
       </div>
     </div>
@@ -180,11 +181,27 @@ export default {
   },
 
   created() {
-    this.displayContent("");
+    
     this.getPathLink();
   },
   mounted() {
+    this.displayContent("");
     this.appendCopyButtons();
+    console.log(document.getElementsByTagName("li"));
+    var codeSnippets = document.getElementsByTagName("li");
+
+    Array.from(codeSnippets).forEach(el => {
+        // el.classList.remove("active-link");
+        console.log("hello");
+        console.log(el.className);
+      });
+
+    
+
+    // var headings = document.getElementsByTagName("h2");
+    // this.headings = headings;
+    console.log(this.headings);
+
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
     }
@@ -344,7 +361,7 @@ export default {
   padding-bottom: 89px;
 }
 .subheader {
-  display: none;
+  display: none !important;
 }
 .doc-container {
   display: flex;
@@ -584,7 +601,7 @@ li a:hover {
   }
 
   .subheader {
-    display: inline;
+    display: flex !important;
     background-color: #fef8ee;
     padding: 0 45px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
