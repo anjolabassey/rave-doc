@@ -96,7 +96,11 @@
             <span class="keys">{{secretKey}}</span>
           </p>
         </div>
-        <div v-html="content"></div>
+
+        <div v-html="content" >
+          
+      
+        </div>
       </div>
 
       <div class="right-nav">
@@ -152,13 +156,15 @@
 <script>
 import Header from "../components/Header";
 import NeedHelp from "../components/NeedHelp";
+import Test from "../components/Test";
 
 export default {
   name: "Docs",
   props: ["feature", "language", "article"],
   components: {
     Header,
-    NeedHelp
+    NeedHelp,
+    Test
   },
   data() {
     return {
@@ -176,31 +182,37 @@ export default {
       pathLinks: [],
       headings: [],
       content: "",
-      comment: ""
+      comment: "",
+      dynamicComponent: {
+        template: `<p>Wheee</p>`
+      },
+      dynamic: "<div @click='alertMe'>Hello World</div>"
     };
   },
 
   created() {
-    
     this.getPathLink();
   },
   mounted() {
     this.displayContent("");
     this.appendCopyButtons();
-    console.log(document.getElementsByTagName("li"));
-    var codeSnippets = document.getElementsByTagName("li");
 
-    Array.from(codeSnippets).forEach(el => {
-        // el.classList.remove("active-link");
-        console.log("hello");
-        console.log(el.className);
-      });
+    var prep = document.getElementsByTagName("code");
+    var iterable = [].slice.call(prep);
 
-    
+    for (var elem in prep) {
+      console.log(elem);
+    }
+
+    //console.log(typeof prep,iterable);
+    // Array.from(prep).forEach(el => {
+    //   console.log(el)
+
+    // });
 
     // var headings = document.getElementsByTagName("h2");
     // this.headings = headings;
-    console.log(this.headings);
+    // console.log(this.headings);
 
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
@@ -212,6 +224,9 @@ export default {
     }
   },
   methods: {
+    alertMe() {
+      alert("It works");
+    },
     // Switch content based on selected sdk
     selectSdk() {
       this.displayContent("");
@@ -239,8 +254,11 @@ export default {
         });
       // }
     },
+    copyCode() {
+      console.log("copying")
+    },
     // Fetch and display the content from github
-    displayContent: function(value) {
+    displayContent(value) {
       let vm = this;
       let url;
       // console.log(value);
@@ -260,11 +278,19 @@ export default {
           var content = this.b64DecodeUnicode(response.data["data"][0].content);
           // If you're in the browser, the Remarkable class is already available in the window
           var md = new Remarkable({
-            html: true
+            html: true,
+            typographer: true
           });
 
           content = md.render(content);
-          vm.content = content;
+          // content.replace("<pre>", "<pre><button class='copy-btn' @click='copyCode'>Copy</button>");
+          content.replace("Verify the transfer status", "Verify nothing");
+          console.log(content);
+          vm.content = content
+
+          var headings = document.getElementsByTagName("h2");
+          vm.headings = headings;
+          console.log(vm.headings);
 
           // this.$refs.content.innerHTML = md.render(content);
 

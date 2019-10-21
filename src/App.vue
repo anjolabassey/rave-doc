@@ -46,7 +46,6 @@
   border: none;
   border-bottom: 2px solid lightgrey;
   border-radius: 4px;
-  
 }
 .color {
   color: rebeccapurple;
@@ -92,7 +91,37 @@
   border-left: 5px solid #b8e986;
   padding: 16px 24px;
 }
+.copy-btn {
+  /* position: absolute; */
+  top: 7px;
+  right: 13px;
+  z-index: 2;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  /* padding: 5px 10px; */
+  color: #555555;
+  background: #ffffff;
+  box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
+    0px 0px 3px rgba(63, 63, 68, 0.05);
+  border-radius: 2px;
+  font-family: Open-Sans;
+  font-size: 8px;
+  line-height: 11px;
+  margin-bottom: 30px;
+}
 
+.copy-btn:hover {
+  text-decoration: none;
+  box-shadow: 1px 1px 5px rgba(50, 50, 54, 0.13),
+    0px 0px 5px rgba(63, 63, 68, 0.05);
+}
+.copy-btn:before {
+  content: url("./assets/img/Group.svg");
+  position: relative;
+  margin-right: 4px;
+  top: 2px;
+}
 pre {
   page-break-inside: avoid;
   font-family: monospace;
@@ -109,6 +138,14 @@ pre {
   overflow-x: auto;
   background: rgba(232, 236, 242, 0.674536);
   font-family: Open-Sans;
+}
+
+.jk {
+  color: red;
+  background-color: yellowgreen;
+}
+pre code {
+  position: relative;
 }
 
 pre .c {
