@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Docs from "./views/Docs.vue";
-import Tech from "./views/Tech.vue";
+import Payments from "./views/Payments.vue";
 
 Vue.use(Router);
 
@@ -36,9 +36,9 @@ export default new Router({
       props: true
     },
     {
-      path: "/tech",
-      name: "tech",
-      component: Tech
+      path: "/payments",
+      name: "payments",
+      component: Payments
     }
   ]
 });

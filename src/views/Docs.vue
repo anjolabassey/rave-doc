@@ -97,10 +97,7 @@
           </p>
         </div>
 
-        <div v-html="content" >
-          
-      
-        </div>
+        <div v-html="content"></div>
       </div>
 
       <div class="right-nav">
@@ -255,7 +252,7 @@ export default {
       // }
     },
     copyCode() {
-      console.log("copying")
+      console.log("copying");
     },
     // Fetch and display the content from github
     displayContent(value) {
@@ -284,9 +281,14 @@ export default {
 
           content = md.render(content);
           // content.replace("<pre>", "<pre><button class='copy-btn' @click='copyCode'>Copy</button>");
-          content.replace("Verify the transfer status", "Verify nothing");
+          // content.replace("Verify the transfer status", "Verify nothing");
           console.log(content);
-          vm.content = content
+
+          // var find = "abc";
+          // var re = new RegExp(find, "g");
+
+          // str = str.replace(re, "");
+          vm.content = content;
 
           var headings = document.getElementsByTagName("h2");
           vm.headings = headings;

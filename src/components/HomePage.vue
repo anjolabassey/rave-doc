@@ -29,7 +29,7 @@
          
           
             <div class="card firstlink">
-               <router-link class="nolink" to="/Tech">
+               <router-link class="nolink" to="/Payments">
               <img src="../assets/img/payments.svg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-title">Payments</p>
@@ -118,71 +118,6 @@
 
 
          
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="tryWrapper">
-        <p id="title">Add Rave to your project</p>
-        <p id="sub-title">
-          Try the Rave API in seconds. Charge a card, tokenize a card, create a
-          subscription and more by following the steps below.
-        </p>
-        <div class="try">
-          <div class="tryHeader">
-            <div id="nav">
-              <p id="charge" class="text-current">
-                <span class="trynow-current">1</span>Charge card
-              </p>
-              <p id="verify" class="text-waiting">
-                <span class="trynow-waiting">2</span>Verify
-              </p>
-              <p id="paymentplan" class="text-waiting">
-                <span class="trynow-waiting">3</span>Create Payment Plan
-              </p>
-              <p id="tokenize" class="text-waiting">
-                <span class="trynow-waiting">4</span>Tokenized Recurring Charge
-              </p>
-              <p id="success" class="text-waiting">
-                <span class="trynow-waiting">5</span>Success!
-              </p>
-            </div>
-            <p id="banner">
-              You can embed rave on your website by using the getpaidSetup
-              function. Enter any of our test card details on the modal
-            </p>
-          </div>
-
-          <div class="codebox">
-            <pre>
-                function payWithRave() {
-                var x = getpaidSetup({
-                PBFPubKey: API_publicKey,
-                customer_email: "user@example.com",
-                amount: 2000,
-                currency: "NGN",
-                txref: "rave-123456",
-                onclose: function() {},
-                callback: function(response) {
-                var txref = response.tx.txRef; // collect txRef returned and pass to a server page to complete status check.
-                console.log("This is the response returned after a charge", response);
-                if (response.tx.chargeResponseCode == "00" ||
-                response.tx.chargeResponseCode == "0") {
-                    // redirect to a success page
-                    } else {
-                    // redirect to a failure page.
-                    }
-            
-                    x.close(); // use this to close the modal immediately after payment.
-                    }
-                    });
-                }
-                
-            </pre>
-
-            <button id="pay" class="btn show">Test payment</button>
-          </div>
         </div>
       </div>
     </div>
