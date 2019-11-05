@@ -162,6 +162,9 @@ pre {
   list-style-type: none;
   font-weight: 500;
 }
+.menulink {
+  color: #637381 !important;
+}
 pre code {
   margin-top: 10px;
 }

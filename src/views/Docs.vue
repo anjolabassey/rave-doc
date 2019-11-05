@@ -120,7 +120,7 @@
 
         <!-- <ul>
           <li class="menu" v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
-        </ul> -->
+        </ul>-->
       </div>
     </div>
 
@@ -260,11 +260,12 @@ export default {
     linkHeadings(val) {
       const headings = document.querySelectorAll(val);
       const linkContent = `<i class="fa fa-anchor"></i>`;
-      // console.log(headings);
+      console.log(headings);
       var storeHeadings = [];
 
       [].forEach.call(headings, function(el) {
-        
+        el.id = el.innerText;
+        storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
         linkIcon.setAttribute("href", `#${el.innerText}`);
@@ -272,27 +273,20 @@ export default {
         linkIcon.innerHTML = linkContent;
 
         el.append(linkIcon);
-        storeHeadings.push(el);
 
         el.addEventListener("mouseover", function(event) {
-          event.target.lastChild.classList.toggle("hide")
-         
+          event.target.lastChild.classList.toggle("hide");
         });
         el.addEventListener("mouseout", function(event) {
-          event.target.lastChild.classList.toggle("hide")
-         
+          event.target.lastChild.classList.toggle("hide");
         });
       });
-      var right_nav = "<ul>"
-    // console.log(storeHeadings);
-    storeHeadings.forEach((item) => {
-      // console.log(item.innerHTML);
-      right_nav += `<li class="menu">${item.innerHTML}</li>`
+      var right_nav = "<ul>";
+      storeHeadings.forEach(item => {
+        right_nav += `<li class="menu"><a class="menulink" href="#${item.innerText}">${item.innerText}</a></li>`;
+      });
 
-    })
-     
       this.headings = right_nav;
-
     },
     waitTillHeadingIsComplete(selector) {
       return new Promise((resolve, reject) => {
@@ -306,11 +300,10 @@ export default {
 
             this.linkHeadings(selector);
           } else {
-          // console.log(">>> Waiting for Header");
+            // console.log(">>> Waiting for Header");
           }
         }, 1000);
       });
-
     },
     waitTillLoadIsComplete(selector) {
       return new Promise((resolve, reject) => {
