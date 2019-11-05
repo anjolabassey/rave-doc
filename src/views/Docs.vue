@@ -97,7 +97,13 @@
           </p>
         </div>
 
-        <div v-html="content"></div>
+        <div v-html="content">
+          <!-- <div> -->
+          <!-- {{content}} -->
+          <!-- <ul>
+          <li class="menu" v-for="item in content">{{ item["Transfer Overview"] }}</li>
+          </ul>-->
+        </div>
       </div>
 
       <div class="right-nav">
@@ -108,11 +114,13 @@
 
         <hr />
 
-        <p class="heading">TABLE OF CONTENTS</p>
+        <!-- <gg /> -->
 
-        <ul>
+        <p class="heading" v-html="headings">TABLE OF CONTENTS</p>
+
+        <!-- <ul>
           <li class="menu" v-for="item in headings" :key="item.innerText">{{ item.innerText }}</li>
-        </ul>
+        </ul> -->
       </div>
     </div>
 
@@ -147,6 +155,10 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </popover>
+    <div>
+      <p>{{copyInput}}</p>
+      <input type="hidden" id="copy-input" :value="copyInput" />
+    </div>
   </div>
 </template>
 
@@ -175,11 +187,11 @@ export default {
         { value: "php", name: "PHP" }
       ],
       selectedSdk: "node",
-
       pathLinks: [],
-      headings: [],
+      headings: "",
       content: "",
       comment: "",
+      copyInput: "",
       dynamicComponent: {
         template: `<p>Wheee</p>`
       },
@@ -188,28 +200,14 @@ export default {
   },
 
   created() {
+    // console.log("created");
     this.getPathLink();
+    this.displayContent("");
   },
   mounted() {
-    this.displayContent("");
-    this.appendCopyButtons();
-
-    var prep = document.getElementsByTagName("code");
-    var iterable = [].slice.call(prep);
-
-    for (var elem in prep) {
-      console.log(elem);
-    }
-
-    //console.log(typeof prep,iterable);
-    // Array.from(prep).forEach(el => {
-    //   console.log(el)
-
-    // });
-
-    // var headings = document.getElementsByTagName("h2");
-    // this.headings = headings;
-    // console.log(this.headings);
+    // console.log("mounted");
+    // this.waitTillLoadIsComplete(".copy-btn");
+    // this.waitTillHeadingIsComplete("#heading2");
 
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
@@ -221,18 +219,129 @@ export default {
     }
   },
   methods: {
+    execFunc(func) {
+      func();
+    },
+    copyCode(val) {
+      const buttons = document.querySelectorAll(val);
+      var vm = this;
+
+      Array.from(buttons).forEach(el => {
+        el.addEventListener("click", function(event) {
+          // console.log(event.target.nextElementSibling.innerText);
+          var copiedText = event.target.nextElementSibling.innerText;
+          var pub = copiedText.search("npm");
+          var sec = copiedText.search("ravepay");
+
+          if (pub > 0 || sec > 0) {
+            copiedText = copiedText.replace("npm", "newNpm");
+            copiedText = copiedText.replace("ravepay", "newRavepay");
+          }
+
+          // vm.copyInput = copiedText;
+
+          var copyText = document.querySelector("#copy-input");
+
+          copyText.value = copiedText;
+          copyText.setAttribute("type", "text");
+          copyText.select();
+
+          try {
+            var successful = document.execCommand("copy");
+            var msg = successful ? "successfully" : "unsuccessfully";
+            console.log("code was copied " + msg);
+          } catch (err) {
+            console.log("Oops, unable to copy");
+          }
+          // vm.copyInput = "";
+        });
+      });
+    },
+    linkHeadings(val) {
+      const headings = document.querySelectorAll(val);
+      const linkContent = `<i class="fa fa-anchor"></i>`;
+      // console.log(headings);
+      var storeHeadings = [];
+
+      [].forEach.call(headings, function(el) {
+        
+
+        const linkIcon = document.createElement("a");
+        linkIcon.setAttribute("href", `#${el.innerText}`);
+        linkIcon.setAttribute("class", "hide");
+        linkIcon.innerHTML = linkContent;
+
+        el.append(linkIcon);
+        storeHeadings.push(el);
+
+        el.addEventListener("mouseover", function(event) {
+          event.target.lastChild.classList.toggle("hide")
+         
+        });
+        el.addEventListener("mouseout", function(event) {
+          event.target.lastChild.classList.toggle("hide")
+         
+        });
+      });
+      var right_nav = "<ul>"
+    // console.log(storeHeadings);
+    storeHeadings.forEach((item) => {
+      // console.log(item.innerHTML);
+      right_nav += `<li class="menu">${item.innerHTML}</li>`
+
+    })
+     
+      this.headings = right_nav;
+
+    },
+    waitTillHeadingIsComplete(selector) {
+      return new Promise((resolve, reject) => {
+        const id = setInterval(() => {
+          let btn = document.querySelector(selector);
+          if (btn !== null) {
+            // console.log(">>>. Found Header", btn);
+
+            // resolve(id);
+            clearInterval(id);
+
+            this.linkHeadings(selector);
+          } else {
+          // console.log(">>> Waiting for Header");
+          }
+        }, 1000);
+      });
+
+    },
+    waitTillLoadIsComplete(selector) {
+      return new Promise((resolve, reject) => {
+        const id = setInterval(() => {
+          let btn = document.querySelector(selector);
+          if (btn !== null) {
+            // console.log(">>>. Found Button", btn);
+
+            // resolve(id);
+            clearInterval(id);
+            this.copyCode(selector);
+            // this.linkHeadings(selector);
+          } else console.log(">>> ");
+        }, 1000);
+      });
+
+      // const id = setInterval(() => {
+      //   let btn = document.querySelector(".copy-btn");
+      //   if (btn !== null) {
+      //     console.log(">>>. Found Button", btn);
+      //     clearInterval(id);
+      //   } else console.log(">>> Waiting for button");
+      // }, 1000);
+    },
+
     alertMe() {
       alert("It works");
     },
     // Switch content based on selected sdk
     selectSdk() {
       this.displayContent("");
-      var headings = document.getElementsByTagName("h2");
-      this.headings = headings;
-    },
-    // Append copy buttons to the pre tags
-    appendCopyButtons() {
-      var pres = document.getElementsByTagName("h2");
     },
     // Get the path links
     getPathLink() {
@@ -250,9 +359,6 @@ export default {
           console.log(error);
         });
       // }
-    },
-    copyCode() {
-      console.log("copying");
     },
     // Fetch and display the content from github
     displayContent(value) {
@@ -273,6 +379,7 @@ export default {
         .then(response => {
           // console.log(response);
           var content = this.b64DecodeUnicode(response.data["data"][0].content);
+
           // If you're in the browser, the Remarkable class is already available in the window
           var md = new Remarkable({
             html: true,
@@ -280,36 +387,15 @@ export default {
           });
 
           content = md.render(content);
-          // content.replace("<pre>", "<pre><button class='copy-btn' @click='copyCode'>Copy</button>");
-          // content.replace("Verify the transfer status", "Verify nothing");
-          console.log(content);
 
-          // var find = "abc";
-          // var re = new RegExp(find, "g");
+          vm.content = content
+            .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>')
+            .replace(/<h2>/gi, '<h2 id="heading2">');
 
-          // str = str.replace(re, "");
-          vm.content = content;
+          console.log(vm.content.search("<h2>"));
 
-          var headings = document.getElementsByTagName("h2");
-          vm.headings = headings;
-          console.log(vm.headings);
-
-          // this.$refs.content.innerHTML = md.render(content);
-
-          // const headers = document.querySelectorAll("h2,h3");
-          // const linkContent = "  &#9875";
-
-          // for (const heading of headings) {
-          //   const linkIcon = document.createElement("a");
-          //   linkIcon.setAttribute("href", `#${heading.innerHTML}`);
-          //   linkIcon.setAttribute("class", "anchor");
-          //   linkIcon.innerHTML = linkContent;
-          //   // heading.append(linkIcon);
-          // }
-          // console.log(pre);
-
-          // var headings = document.getElementsByTagName("h2");
-          // this.headings = headings;
+          vm.waitTillLoadIsComplete(".copy-btn");
+          vm.waitTillHeadingIsComplete("#heading2");
         })
         .catch(function(error) {
           console.log(error);
@@ -542,16 +628,7 @@ li a:hover {
   margin-right: 11px;
   margin-top: 3px;
 }
-.anchor {
-  /* background: url(../img/); */
-  text-decoration: none;
-  opacity: 0;
-  color: #637381;
-}
-.anchor:hover {
-  opacity: 1;
-  text-decoration: none;
-}
+
 .keys-callout {
   background-color: rgb(187, 229, 179, 0.5);
   mix-blend-mode: normal;

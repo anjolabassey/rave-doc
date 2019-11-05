@@ -18,7 +18,7 @@
           <div class="col-6 text-left help-btn">
             <!-- <a class="btn-primary" id="slack" href="#">Get help</a> -->
 
-            <a href="https://support.flutterwave.com" target="_blank">Get Help</a>
+            <a href="http://34.247.34.48/forum" target="_blank">Get Help</a>
           </div>
         </div>
       </div>
@@ -179,8 +179,9 @@
               at elementum velit accumen pulvinar.
             </p>
           </div>
-          <div class="footer">
-            <a href="#" class>Read more</a>
+          <div @click="changed" class="footer">
+            <!-- <a href="#" class>Read more</a> -->
+            <p>{{ $store.getters.loggedIn }}</p>
           </div>
         </div>
       </div>
@@ -209,12 +210,17 @@ export default {
     };
   },
   methods: {
-    goToDocs: function(feature, language, article) {
+    goToDocs(feature, language, article) {
       //   alert(`we going`);
       this.$router.push({
         name: "docs",
         params: { feature: feature, language: language, article: article }
       });
+    },
+    changed() {
+      this.$store.commit('change', true)
+      console.log($store.getters.loggedIn)
+
     }
   }
 };

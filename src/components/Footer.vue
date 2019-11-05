@@ -5,7 +5,7 @@
     </div>
 
     <div class="help-btn">
-      <router-link to="" target="_blank">Get Help</router-link>
+      <router-link to="http://34.247.34.48/forum" target="_blank">Get Help</router-link>
     </div>
   </footer>
 </template>

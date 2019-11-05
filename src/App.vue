@@ -92,14 +92,14 @@
   padding: 16px 24px;
 }
 .copy-btn {
-  /* position: absolute; */
-  top: 7px;
+  position: absolute;
+  top: 12px;
   right: 13px;
   z-index: 2;
   cursor: pointer;
   border: none;
   outline: none;
-  /* padding: 5px 10px; */
+  padding: 5px 10px;
   color: #555555;
   background: #ffffff;
   box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
@@ -108,7 +108,7 @@
   font-family: Open-Sans;
   font-size: 8px;
   line-height: 11px;
-  margin-bottom: 30px;
+  
 }
 
 .copy-btn:hover {
@@ -123,6 +123,7 @@
   top: 2px;
 }
 pre {
+  position: relative;
   page-break-inside: avoid;
   font-family: monospace;
   font-size: 12px;
@@ -140,12 +141,29 @@ pre {
   font-family: Open-Sans;
 }
 
-.jk {
-  color: red;
-  background-color: yellowgreen;
+.fa {
+  text-decoration: none;
+  opacity: 0.5;
+  margin-left: 10px;
+  color: #637381;
+}
+.fa:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+.hide {
+  visibility:hidden;
+}
+.show {
+  visibility: visible;
+}
+.menu {
+  margin: 16px 0px;
+  list-style-type: none;
+  font-weight: 500;
 }
 pre code {
-  position: relative;
+  margin-top: 10px;
 }
 
 pre .c {
