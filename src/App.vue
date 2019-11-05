@@ -167,6 +167,9 @@ pre {
 .show {
   visibility: visible;
 }
+.heading ul {
+  padding: 0 !important;
+}
 .menu {
   margin: 16px 0px;
   list-style-type: none;

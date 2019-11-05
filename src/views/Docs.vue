@@ -538,7 +538,7 @@ div[data-popover="comments"] button {
   background-color: #4d5679;
 }
 .left-nav {
-  margin-top: 35px;
+      margin: 35px 35px 0 0;
   text-align: right;
 }
 .left-nav .heading {
@@ -549,7 +549,7 @@ div[data-popover="comments"] button {
   margin-top: 15px;
 }
 .right-nav {
-  margin-top: 35px;
+  margin: 35px 0 0 35px;
 }
 p {
   padding: 0;
