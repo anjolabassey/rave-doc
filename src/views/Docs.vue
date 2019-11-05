@@ -277,6 +277,7 @@ export default {
         storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
+        // linkIcon = `<router-link :to="{ name: 'docs', params: { feature: ${this.feature}, language: ${this.language}, article: ${this.article} }}">${el.innerText}</router-link>`;
         linkIcon.setAttribute("href", `#${el.innerText}`);
         linkIcon.setAttribute("class", "hide");
         linkIcon.innerHTML = linkContent;
@@ -481,7 +482,7 @@ export default {
 }
 .doc-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-top: 35px;
 }
 .doc-content {
@@ -549,6 +550,10 @@ div[data-popover="comments"] button {
 }
 .right-nav {
   margin-top: 35px;
+}
+p {
+  padding: 0;
+  margin: 0;
 }
 ul {
   list-style-type: none;
