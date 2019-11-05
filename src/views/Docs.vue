@@ -192,10 +192,19 @@ export default {
       content: "",
       comment: "",
       copyInput: "",
-      dynamicComponent: {
-        template: `<p>Wheee</p>`
-      },
-      dynamic: "<div @click='alertMe'>Hello World</div>"
+      metaInfo: {
+        title: "My Example App",
+        metaTags: [
+          {
+          name: 'og:title',
+          content: 'The meta title of our example app.'
+        },
+        {
+          property: 'og:description',
+          content: 'The meta description of our example app.'
+        }
+        ]
+      }
     };
   },
 
