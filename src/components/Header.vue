@@ -286,6 +286,8 @@ export default {
   color: #4d5679;
   margin-left: 14px;
   margin-bottom: 15px;
+  /* position: absolute; */
+  /* z-index: 2; */
   /* text-align: center; */
 }
 .modal-list {
