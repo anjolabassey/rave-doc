@@ -8,12 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import Popover from "vue-js-popover";
+import VueMeta from "vue-meta";
 
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
 Vue.use(InstantSearch);
 Vue.use(Popover);
+Vue.use(VueMeta);
 
 new Vue({
   router,

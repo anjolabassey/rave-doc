@@ -194,15 +194,15 @@ export default {
       copyInput: "",
       metaInfo: {
         title: "My Example App",
-        metaTags: [
+        meta: [
           {
-          name: 'og:title',
-          content: 'The meta title of our example app.'
-        },
-        {
-          property: 'og:description',
-          content: 'The meta description of our example app.'
-        }
+            property: "og:title",
+            content: "The dynamic meta title of our example app."
+          },
+          {
+            property: "og:description",
+            content: "The dynamic meta description of our example app."
+          }
         ]
       }
     };
@@ -269,30 +269,37 @@ export default {
     linkHeadings(val) {
       const headings = document.querySelectorAll(val);
       const linkContent = `<i class="fa fa-anchor"></i>`;
-      console.log(headings);
+      // console.log(headings);
       var storeHeadings = [];
+      let baseURL = window.location.href;
 
       [].forEach.call(headings, function(el) {
+        // console.log(window.location.href);
         el.id = el.innerText;
         storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
         // linkIcon = `<router-link :to="{ name: 'docs', params: { feature: ${this.feature}, language: ${this.language}, article: ${this.article} }}">${el.innerText}</router-link>`;
         linkIcon.setAttribute("href", `#${el.innerText}`);
-        linkIcon.setAttribute("class", "hide");
+        // linkIcon.setAttribute("class", "hide");
         linkIcon.innerHTML = linkContent;
 
         el.append(linkIcon);
 
         el.addEventListener("mouseover", function(event) {
-          event.target.lastChild.classList.toggle("hide");
+          event.target.lastChild.classList.add("show");
         });
-        el.addEventListener("mouseout", function(event) {
-          event.target.lastChild.classList.toggle("hide");
+        el.addEventListener("click", function(event) {
+          event.target.lastChild.classList.remove("show");
+          event.target.lastChild.classList.add("hide");
         });
       });
       var right_nav = "<ul>";
       storeHeadings.forEach(item => {
+        // var url = item.innerText.replace(/\s+/g, "");
+        // console.log("url: " + item.innerText)
+        // console.log("encoded url: " + item.innerText.replace(/\s+/g, ''));
+        // console.log(item.innerText)
         right_nav += `<li class="menu"><a class="menulink" href="#${item.innerText}">${item.innerText}</a></li>`;
       });
 
@@ -395,8 +402,6 @@ export default {
             .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>')
             .replace(/<h2>/gi, '<h2 id="heading2">');
 
-          console.log(vm.content.search("<h2>"));
-
           vm.waitTillLoadIsComplete(".copy-btn");
           vm.waitTillHeadingIsComplete("#heading2");
         })
@@ -482,7 +487,7 @@ export default {
 }
 .doc-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 35px;
 }
 .doc-content {
@@ -538,7 +543,7 @@ div[data-popover="comments"] button {
   background-color: #4d5679;
 }
 .left-nav {
-      margin: 35px 35px 0 0;
+  margin: 35px 35px 0 0;
   text-align: right;
 }
 .left-nav .heading {

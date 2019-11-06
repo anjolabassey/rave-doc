@@ -39,10 +39,7 @@ export default new Router({
       path: "/docs/:feature/:language/:article",
       name: "docs",
       component: Docs,
-      props: true,
-      meta: {
-        title: "Hello"
-      }
+      props: true
     },
     {
       path: "/payments",

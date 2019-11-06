@@ -10,12 +10,23 @@
 </template>
 <script>
 export default {
-  
-  watch: {
-      '$route' (to, from) {
-        document.title = to.meta.title || 'Your Website'
-      }
-    },
+  name: 'App',
+  metaInfo: {
+      
+      title: 'Flutterwave Documentation',
+      // all titles will be injected into this template
+      titleTemplate: '%s | My Awesome Webapp',
+      meta: [
+          {
+            property: "og:title",
+            content: "The meta title of our example app."
+          },
+          {
+            property: "og:description",
+            content: "The meta description of our example app."
+          }
+        ]
+    }
 }
 </script>
 

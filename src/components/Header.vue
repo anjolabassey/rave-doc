@@ -31,15 +31,63 @@
    
                   }"
                 ></ais-search-box>
-                <ais-results>
+                <!-- <ais-results>
                   <template slot-scope="{ result }">
                     <p class="title">{{ result.title}}</p>
-                    <!-- <p class="subtitle">{{ result.description }}</p> -->
-                    <!-- <a>{{ result.title }}</a> -->
+                    <p class="subtitle">{{ result.description }}</p>
+                    <a>{{ result.title }}</a>
                   </template>
-                </ais-results>
+                </ais-results>-->
 
-                
+                <ais-panel 
+                  :class-names="{
+                    'ais-Panel': 'panel',
+                    'ais-Panel-body': 'panelBody',
+                    }">
+                    <div class="default-panel">
+                  <div class="row">
+                    <div class="col-6">
+                      <h4>Getting Started</h4>
+                      <ul class="modal-list">
+                        <li><a href>Quickstart</a></li>
+                        <li><a href>How to get your API Keys</a></li>
+                        <li><a href>Error handling</a></li>
+                        <li><a href>Flutterwave Libraries</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-6">
+                      <h4>Payments</h4>
+                      <ul class="modal-list">
+                        <li><a href>Overview</a> 
+                        <!-- | <small>hello</small></li>  -->
+                        <li><a href="https://developer.flutterwave.com/docs/plugins" target="_blank">Plugins and Libraries</a></li>
+                        <li><a href>Collecting Web payments</a></li>
+                        <li><a href>Collecting Mobile payments</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <h4>Features</h4>
+                      <ul class="modal-list">
+                        <li><a href="https://developer.flutterwave.com/docs/split-payment" target="_blank">Split payments</a></li>
+                        <li><a href>Bill payments</a></li>
+                        <li><a href>Virtual Cards</a></li>
+                        <li><a href>Transfers</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-6">
+                      <h4>API Reference</h4>
+                      <ul class="modal-list">
+                        <li><a href>API Introduction</a></li>
+                        <li><a href>Authentication</a></li>
+                        <li><a href>Webhooks</a></li>
+                        <li><a href>Errors</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                    </div>
+                </ais-panel>
               </ais-index>
             </div>
           </div>
@@ -225,6 +273,37 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal-content {
+  /* background-color: red; */
+  height: 500px;
+  
+}
+.default-panel {
+  padding: 10px 10px;
+}
+.modal-content h4 {
+  font-size: 16px;
+  color: #4d5679;
+  margin-left: 14px;
+  margin-bottom: 15px;
+  /* text-align: center; */
+}
+.modal-list {
+   list-style-type: none;
+   padding-left: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.modal-list a {
+  text-decoration: none;
+  color: #8d8e94;
+  padding: 25px 10px 9px 10px;
+}
+.modal-list a:hover {
+  text-decoration: none;
+  color: #f5a623;
+}
+
 .navbar {
   background-color: #fef8ee;
   height: 77px;
