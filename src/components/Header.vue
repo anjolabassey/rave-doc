@@ -98,7 +98,7 @@
           <input
             class="form-control mr-sm-2"
             type="search"
-            placeholder="Search the documentation"
+            placeholder="Search docs"
             aria-label="Search"
           />
           <img class src="../assets/img/search.svg" />
@@ -205,6 +205,11 @@ export default {
       this.username = localStorage.username;
       this.initials = initials;
     }
+    // var ss = document.getElementsByClassName("searchBox");
+    // console.log(ss);
+    // ss.addEventListener("click", function(event) {
+    //   console.log("clicked: " + event);
+    // })
   },
   methods: {
     // Log user out of their profile on the documentation
@@ -352,9 +357,13 @@ export default {
 .navbar-nav {
   text-align: right;
   /* background-color: #fafafa; */
-  margin-left: 70%;
+  margin-left: 10%;
   padding: 10px;
   border-radius: 4px;
+}
+.navbar-collapse, .collapse {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .search {
@@ -362,7 +371,7 @@ export default {
   position: relative;
   height: 40px;
   /* margin-right: 17px; */
-  /* margin-left: 30px; */
+  margin-left: 20%;
   margin-top: 2px;
   /* overflow:hidden; */
   border-radius: 20.25px;
@@ -394,7 +403,8 @@ li img {
   border: 0.9px solid #c4b7a2;
   box-sizing: border-box;
   border-radius: 20.25px;
-  width: 513px;
+  /* width: 513px; */
+  width: 250px;
   height: 40px;
   outline: none;
   overflow: hidden;
