@@ -14,9 +14,11 @@ export default {
   metaInfo: {
       
       title: 'Flutterwave Documentation',
-      // all titles will be injected into this template
-      titleTemplate: '%s | My Awesome Webapp',
       meta: [
+          { 
+            name: "description", 
+            content: "Flutterwave documentation. Solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
+          },
           {
             property: "og:title",
             content: "The meta title of our example app."
@@ -68,8 +70,12 @@ export default {
   border-bottom: 2px solid lightgrey;
   border-radius: 4px;
 }
-.color {
-  color: rebeccapurple;
+
+.modal-list a:hover {
+  text-decoration: none;
+  color: #f5a623 !important;
+  box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
+    0px 0px 3px rgba(63, 63, 68, 0.05);
 }
 
 .searchBox__submit,

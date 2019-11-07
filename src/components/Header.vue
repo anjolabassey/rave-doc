@@ -49,20 +49,20 @@
                     <div class="col-6">
                       <h4>Getting Started</h4>
                       <ul class="modal-list">
-                        <li><a href>Quickstart</a></li>
-                        <li><a href>How to get your API Keys</a></li>
-                        <li><a href>Error handling</a></li>
-                        <li><a href>Flutterwave Libraries</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/rave-standard">Quickstart</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/api-keys">How to get your API Keys</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Error handling</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/plugins">Flutterwave Libraries</a></li>
                       </ul>
                     </div>
                     <div class="col-6">
                       <h4>Payments</h4>
                       <ul class="modal-list">
-                        <li><a href>Overview</a> 
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#introduction">Overview</a> </li>
                         <!-- | <small>hello</small></li>  -->
-                        <li><a href="https://developer.flutterwave.com/docs/plugins" target="_blank">Plugins and Libraries</a></li>
-                        <li><a href>Collecting Web payments</a></li>
-                        <li><a href>Collecting Mobile payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/plugins">Plugins and Libraries</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/integrating-rave">Collecting Web payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/plugins#section-mobile-sdk">Collecting Mobile payments</a></li>
                       </ul>
                     </div>
                   </div>
@@ -71,18 +71,18 @@
                       <h4>Features</h4>
                       <ul class="modal-list">
                         <li><a href="https://developer.flutterwave.com/docs/split-payment" target="_blank">Split payments</a></li>
-                        <li><a href>Bill payments</a></li>
-                        <li><a href>Virtual Cards</a></li>
-                        <li><a href>Transfers</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#bill-payments">Bill payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#create-a-virtual-card">Virtual Cards</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#how-transfers-work">Transfers</a></li>
                       </ul>
                     </div>
                     <div class="col-6">
                       <h4>API Reference</h4>
                       <ul class="modal-list">
-                        <li><a href>API Introduction</a></li>
-                        <li><a href>Authentication</a></li>
-                        <li><a href>Webhooks</a></li>
-                        <li><a href>Errors</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/api-introduction">API Introduction</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#section-step-4-validate-the-payment">Authentication</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/events-webhooks">Webhooks</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Errors</a></li>
                       </ul>
                     </div>
                   </div>
@@ -285,7 +285,7 @@ export default {
   font-size: 16px;
   color: #4d5679;
   margin-left: 14px;
-  margin-bottom: 15px;
+  margin-top: 12px;
   /* position: absolute; */
   /* z-index: 2; */
   /* text-align: center; */
@@ -296,14 +296,14 @@ export default {
   font-size: 14px;
   font-weight: 600;
 }
+
 .modal-list a {
   text-decoration: none;
-  color: #8d8e94;
-  padding: 25px 10px 9px 10px;
+  color: #8d8e94;  
 }
-.modal-list a:hover {
-  text-decoration: none;
-  color: #f5a623;
+.modal-list li {
+  margin: 9px 10px 0px 10px;
+  
 }
 
 .navbar {
