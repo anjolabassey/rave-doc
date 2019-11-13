@@ -432,7 +432,7 @@ export default {
       //   params: { feature: this.feature, language: this.language, article: this.article }
       // });
 
-      // let url = event.target.id;
+      let url = event.target.id;
       // console.log(url)
       // this.selectedLanguage = url.slice(0, url.indexOf("/", 1));
       // this.selectedArticle = url.slice(0, url.indexOf("/", 2));
