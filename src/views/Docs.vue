@@ -178,6 +178,8 @@ export default {
   data() {
     return {
       selectedFeature: this.feature,
+      selectedLanguage: "",
+      selectedArticle: "",
       showKeys: false,
       publicKey: "",
       secretKey: "",
@@ -275,10 +277,11 @@ export default {
 
       [].forEach.call(headings, function(el) {
         // console.log(window.location.href);
-        el.id = el.innerText;
+        el.id = el.innerText.replace(/\s+/g, '-');
         storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
+        
         // linkIcon = `<router-link :to="{ name: 'docs', params: { feature: ${this.feature}, language: ${this.language}, article: ${this.article} }}">${el.innerText}</router-link>`;
         linkIcon.setAttribute("href", `#${el.innerText}`);
         // linkIcon.setAttribute("class", "hide");
@@ -297,10 +300,10 @@ export default {
       var right_nav = "<ul>";
       storeHeadings.forEach(item => {
         var url = item.innerText.replace(/\s+/g, '-');
-        console.log("url: " + item.innerText)
+        // console.log("url: " + item.innerText)
         // console.log("encoded url: " + item.innerText.replace(/\s+/g, ''));
         // console.log(item.innerText)
-        right_nav += `<li class="menu"><a class="menulink" href="#${item.innerText}">${item.innerText}</a></li>`;
+        right_nav += `<li class="menu"><a class="menulink" href="#${url}">${item.innerText}</a></li>`;
       });
 
       this.headings = right_nav;
@@ -372,6 +375,7 @@ export default {
     },
     // Fetch and display the content from github
     displayContent(value) {
+      
       let vm = this;
       let url;
       // console.log(value);
@@ -423,7 +427,15 @@ export default {
     changeContent(event) {
       event.preventDefault();
 
-      let url = event.target.id;
+      // this.$router.push({
+      //   name: "docs",
+      //   params: { feature: this.feature, language: this.language, article: this.article }
+      // });
+
+      // let url = event.target.id;
+      // console.log(url)
+      // this.selectedLanguage = url.slice(0, url.indexOf("/", 1));
+      // this.selectedArticle = url.slice(0, url.indexOf("/", 2));
       this.displayContent(url);
 
       var menuList = document.getElementsByClassName("menu-item");
