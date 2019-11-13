@@ -276,23 +276,23 @@ export default {
       let baseURL = window.location.href;
 
       [].forEach.call(headings, function(el) {
-        // console.log(window.location.href);
         el.id = el.innerText.replace(/\s+/g, '-');
         storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
         
-        // linkIcon = `<router-link :to="{ name: 'docs', params: { feature: ${this.feature}, language: ${this.language}, article: ${this.article} }}">${el.innerText}</router-link>`;
-        linkIcon.setAttribute("href", `#${el.innerText}`);
-        // linkIcon.setAttribute("class", "hide");
+
+        linkIcon.setAttribute("href", `#${el.innerText.replace(/\s+/g, '-')}`);
+        linkIcon.setAttribute("class", "hide");
         linkIcon.innerHTML = linkContent;
 
         el.append(linkIcon);
 
         el.addEventListener("mouseover", function(event) {
+          event.target.lastChild.classList.remove("hide");
           event.target.lastChild.classList.add("show");
         });
-        el.addEventListener("click", function(event) {
+        el.addEventListener("mouseaway", function(event) {
           event.target.lastChild.classList.remove("show");
           event.target.lastChild.classList.add("hide");
         });
@@ -354,6 +354,10 @@ export default {
     },
     // Switch content based on selected sdk
     selectSdk() {
+      this.$router.push({
+        name: "docs",
+        params: { feature: this.feature, language: this.language, article: this.article }
+      });
       this.displayContent("");
     },
     // Get the path links
@@ -427,15 +431,20 @@ export default {
     changeContent(event) {
       event.preventDefault();
 
-      // this.$router.push({
-      //   name: "docs",
-      //   params: { feature: this.feature, language: this.language, article: this.article }
-      // });
-
       let url = event.target.id;
-      // console.log(url)
-      // this.selectedLanguage = url.slice(0, url.indexOf("/", 1));
-      // this.selectedArticle = url.slice(0, url.indexOf("/", 2));
+      
+      
+      this.selectedLanguage = url.split("/")[1];
+      this.selectedFeature = url.split("/")[2];
+      this.selectedArticle = url.split("/")[3];
+
+      console.log(this.selectedLanguage + ", " + this.selectedFeature + ", " + this.selectedArticle)
+
+      this.$router.push({
+        name: "docs",
+        params: { feature: this.feature, language: this.language, article: this.article }
+      });
+
       this.displayContent(url);
 
       var menuList = document.getElementsByClassName("menu-item");
