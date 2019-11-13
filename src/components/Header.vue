@@ -39,11 +39,11 @@
                   </template>
                 </ais-results>-->
 
-                <ais-panel 
+                <!-- <ais-panel 
                   :class-names="{
                     'ais-Panel': 'panel',
                     'ais-Panel-body': 'panelBody',
-                    }">
+                    }"> -->
                     <div class="default-panel">
                   <div class="row">
                     <div class="col-6">
@@ -87,7 +87,7 @@
                     </div>
                   </div>
                     </div>
-                </ais-panel>
+                <!-- </ais-panel> -->
               </ais-index>
             </div>
           </div>

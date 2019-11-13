@@ -268,7 +268,7 @@ export default {
     },
     linkHeadings(val) {
       const headings = document.querySelectorAll(val);
-      const linkContent = `<i class="fa fa-anchor"></i>`;
+      const linkContent = `<i class="fas fa-link f2"></i>`;
       // console.log(headings);
       var storeHeadings = [];
       let baseURL = window.location.href;
@@ -296,8 +296,8 @@ export default {
       });
       var right_nav = "<ul>";
       storeHeadings.forEach(item => {
-        // var url = item.innerText.replace(/\s+/g, "");
-        // console.log("url: " + item.innerText)
+        var url = item.innerText.replace(/\s+/g, '-');
+        console.log("url: " + item.innerText)
         // console.log("encoded url: " + item.innerText.replace(/\s+/g, ''));
         // console.log(item.innerText)
         right_nav += `<li class="menu"><a class="menulink" href="#${item.innerText}">${item.innerText}</a></li>`;
@@ -399,8 +399,7 @@ export default {
           content = md.render(content);
 
           vm.content = content
-            .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>')
-            .replace(/<h2>/gi, '<h2 id="heading2">');
+          .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>').replace(/<h2>/gi, '<h2 id="heading2">');
 
           vm.waitTillLoadIsComplete(".copy-btn");
           vm.waitTillHeadingIsComplete("#heading2");

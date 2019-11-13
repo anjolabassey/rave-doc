@@ -108,6 +108,15 @@ export default {
 }
 
 /* style content from github */
+.fa-link {
+  color:rgb(221, 221, 223);
+  font-size: 22px;
+  
+}
+.fa-link::before {
+  margin-left: 10px !important;
+
+}
 .notes {
   background: #f2f2f2;
   mix-blend-mode: normal;
