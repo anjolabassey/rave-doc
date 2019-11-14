@@ -21,9 +21,10 @@
                 <span aria-hidden="true">&times;</span>
               </button>
               <ais-index :search-client="searchClient" index-name="github-pages">
-                <ais-search-box 
-                  :autofocus="true"
+                <ais-search-box
+                  
                   placeholder="Search the documentation"
+                  :autofocus="true"
                   :class-names="{
                     'ais-input': 'searchBox',
                     'ais-search-box__submit': 'searchBox__submit',
@@ -44,26 +45,56 @@
                   :class-names="{
                     'ais-Panel': 'panel',
                     'ais-Panel-body': 'panelBody',
-                    }"> -->
-                    <div class="default-panel">
+                }">-->
+                <div class="default-panel">
                   <div class="row">
                     <div class="col-6">
                       <h4>Getting Started</h4>
                       <ul class="modal-list">
-                        <li><a href="https://developer.flutterwave.com/docs/rave-standard">Quickstart</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/api-keys">How to get your API Keys</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Error handling</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/plugins">Flutterwave Libraries</a></li>
+                        <li>
+                          <a href="https://developer.flutterwave.com/docs/rave-standard">Quickstart</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/api-keys"
+                          >How to get your API Keys</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/rave-errors"
+                          >Error handling</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/plugins"
+                          >Flutterwave Libraries</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="col-6">
                       <h4>Payments</h4>
                       <ul class="modal-list">
-                        <li><a href="https://developer.flutterwave.com/v2.0/reference#introduction">Overview</a> </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/v2.0/reference#introduction"
+                          >Overview</a>
+                        </li>
                         <!-- | <small>hello</small></li>  -->
-                        <li><a href="https://developer.flutterwave.com/docs/plugins">Plugins and Libraries</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/integrating-rave">Collecting Web payments</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/plugins#section-mobile-sdk">Collecting Mobile payments</a></li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/plugins"
+                          >Plugins and Libraries</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/integrating-rave"
+                          >Collecting Web payments</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/plugins#section-mobile-sdk"
+                          >Collecting Mobile payments</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -71,23 +102,52 @@
                     <div class="col-6">
                       <h4>Features</h4>
                       <ul class="modal-list">
-                        <li><a href="https://developer.flutterwave.com/docs/split-payment" target="_blank">Split payments</a></li>
-                        <li><a href="https://developer.flutterwave.com/v2.0/reference#bill-payments">Bill payments</a></li>
-                        <li><a href="https://developer.flutterwave.com/v2.0/reference#create-a-virtual-card">Virtual Cards</a></li>
-                        <li><a href="https://developer.flutterwave.com/v2.0/reference#how-transfers-work">Transfers</a></li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/split-payment"
+                            target="_blank"
+                          >Split payments</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/v2.0/reference#bill-payments"
+                          >Bill payments</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/v2.0/reference#create-a-virtual-card"
+                          >Virtual Cards</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/v2.0/reference#how-transfers-work"
+                          >Transfers</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="col-6">
                       <h4>API Reference</h4>
                       <ul class="modal-list">
-                        <li><a href="https://developer.flutterwave.com/docs/api-introduction">API Introduction</a></li>
-                        <li><a href="https://developer.flutterwave.com/v2.0/reference#section-step-4-validate-the-payment">Authentication</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/events-webhooks">Webhooks</a></li>
-                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Errors</a></li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/docs/api-introduction"
+                          >API Introduction</a>
+                        </li>
+                        <li>
+                          <a
+                            href="https://developer.flutterwave.com/v2.0/reference#section-step-4-validate-the-payment"
+                          >Authentication</a>
+                        </li>
+                        <li>
+                          <a href="https://developer.flutterwave.com/docs/events-webhooks">Webhooks</a>
+                        </li>
+                        <li>
+                          <a href="https://developer.flutterwave.com/docs/rave-errors">Errors</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
-                    </div>
+                </div>
                 <!-- </ais-panel> -->
               </ais-index>
             </div>
@@ -101,6 +161,7 @@
             type="search"
             placeholder="Search docs"
             aria-label="Search"
+            id="searchBar"
           />
           <img class src="../assets/img/search.svg" />
         </form>
@@ -211,6 +272,13 @@ export default {
     // ss.addEventListener("click", function(event) {
     //   console.log("clicked: " + event);
     // })
+
+    search.addEventListener("click", function(event) {
+
+      document.getElementsByClassName("searchBox")[0].autofocus = true;
+      
+    })
+    
   },
   methods: {
     // Log user out of their profile on the documentation
@@ -282,7 +350,6 @@ export default {
 .modal-content {
   /* background-color: red; */
   height: 500px;
-  
 }
 .default-panel {
   padding: 10px 10px;
@@ -297,19 +364,18 @@ export default {
   /* text-align: center; */
 }
 .modal-list {
-   list-style-type: none;
-   padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
   font-size: 14px;
   font-weight: 600;
 }
 
 .modal-list a {
   text-decoration: none;
-  color: #8d8e94;  
+  color: #8d8e94;
 }
 .modal-list li {
   margin: 9px 10px 0px 10px;
-  
 }
 
 .navbar {
