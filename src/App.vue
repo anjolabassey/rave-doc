@@ -8,6 +8,29 @@
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  name: 'App',
+  metaInfo: {
+      
+      title: 'Flutterwave Documentation',
+      meta: [
+          { 
+            name: "description", 
+            content: "Flutterwave documentation. Solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
+          },
+          {
+            property: "og:title",
+            content: "The meta title of our example app."
+          },
+          {
+            property: "og:description",
+            content: "The meta description of our example app."
+          }
+        ]
+    }
+}
+</script>
 
 <style>
 #app {
@@ -47,8 +70,12 @@
   border-bottom: 2px solid lightgrey;
   border-radius: 4px;
 }
-.color {
-  color: rebeccapurple;
+
+.modal-list a:hover {
+  text-decoration: none;
+  color: #f5a623 !important;
+  box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
+    0px 0px 3px rgba(63, 63, 68, 0.05);
 }
 
 .searchBox__submit,
@@ -81,6 +108,15 @@
 }
 
 /* style content from github */
+.fa-link {
+  color:rgb(221, 221, 223);
+  font-size: 22px;
+  
+}
+.fa-link::before {
+  margin-left: 10px !important;
+
+}
 .notes {
   background: #f2f2f2;
   mix-blend-mode: normal;
@@ -92,14 +128,14 @@
   padding: 16px 24px;
 }
 .copy-btn {
-  /* position: absolute; */
-  top: 7px;
+  position: absolute;
+  top: 12px;
   right: 13px;
   z-index: 2;
   cursor: pointer;
   border: none;
   outline: none;
-  /* padding: 5px 10px; */
+  padding: 5px 10px;
   color: #555555;
   background: #ffffff;
   box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
@@ -108,7 +144,7 @@
   font-family: Open-Sans;
   font-size: 8px;
   line-height: 11px;
-  margin-bottom: 30px;
+  
 }
 
 .copy-btn:hover {
@@ -123,6 +159,7 @@
   top: 2px;
 }
 pre {
+  position: relative;
   page-break-inside: avoid;
   font-family: monospace;
   font-size: 12px;
@@ -140,12 +177,35 @@ pre {
   font-family: Open-Sans;
 }
 
-.jk {
-  color: red;
-  background-color: yellowgreen;
+.fa {
+  text-decoration: none;
+  opacity: 0.5;
+  margin-left: 10px;
+  color: #637381;
+}
+.fa:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+.hide {
+  visibility:hidden;
+}
+.show {
+  visibility: visible;
+}
+.heading ul {
+  padding: 0 !important;
+}
+.menu {
+  margin: 16px 0px;
+  list-style-type: none;
+  font-weight: 500;
+}
+.menulink {
+  color: #637381 !important;
 }
 pre code {
-  position: relative;
+  margin-top: 10px;
 }
 
 pre .c {

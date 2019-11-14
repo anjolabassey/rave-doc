@@ -31,15 +31,63 @@
    
                   }"
                 ></ais-search-box>
-                <ais-results>
+                <!-- <ais-results>
                   <template slot-scope="{ result }">
                     <p class="title">{{ result.title}}</p>
-                    <!-- <p class="subtitle">{{ result.description }}</p> -->
-                    <!-- <a>{{ result.title }}</a> -->
+                    <p class="subtitle">{{ result.description }}</p>
+                    <a>{{ result.title }}</a>
                   </template>
-                </ais-results>
+                </ais-results>-->
 
-                
+                <!-- <ais-panel 
+                  :class-names="{
+                    'ais-Panel': 'panel',
+                    'ais-Panel-body': 'panelBody',
+                    }"> -->
+                    <div class="default-panel">
+                  <div class="row">
+                    <div class="col-6">
+                      <h4>Getting Started</h4>
+                      <ul class="modal-list">
+                        <li><a href="https://developer.flutterwave.com/docs/rave-standard">Quickstart</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/api-keys">How to get your API Keys</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Error handling</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/plugins">Flutterwave Libraries</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-6">
+                      <h4>Payments</h4>
+                      <ul class="modal-list">
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#introduction">Overview</a> </li>
+                        <!-- | <small>hello</small></li>  -->
+                        <li><a href="https://developer.flutterwave.com/docs/plugins">Plugins and Libraries</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/integrating-rave">Collecting Web payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/plugins#section-mobile-sdk">Collecting Mobile payments</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <h4>Features</h4>
+                      <ul class="modal-list">
+                        <li><a href="https://developer.flutterwave.com/docs/split-payment" target="_blank">Split payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#bill-payments">Bill payments</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#create-a-virtual-card">Virtual Cards</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#how-transfers-work">Transfers</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-6">
+                      <h4>API Reference</h4>
+                      <ul class="modal-list">
+                        <li><a href="https://developer.flutterwave.com/docs/api-introduction">API Introduction</a></li>
+                        <li><a href="https://developer.flutterwave.com/v2.0/reference#section-step-4-validate-the-payment">Authentication</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/events-webhooks">Webhooks</a></li>
+                        <li><a href="https://developer.flutterwave.com/docs/rave-errors">Errors</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                    </div>
+                <!-- </ais-panel> -->
               </ais-index>
             </div>
           </div>
@@ -50,7 +98,7 @@
           <input
             class="form-control mr-sm-2"
             type="search"
-            placeholder="Search the documentation"
+            placeholder="Search docs"
             aria-label="Search"
           />
           <img class src="../assets/img/search.svg" />
@@ -157,6 +205,11 @@ export default {
       this.username = localStorage.username;
       this.initials = initials;
     }
+    // var ss = document.getElementsByClassName("searchBox");
+    // console.log(ss);
+    // ss.addEventListener("click", function(event) {
+    //   console.log("clicked: " + event);
+    // })
   },
   methods: {
     // Log user out of their profile on the documentation
@@ -225,6 +278,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal-content {
+  /* background-color: red; */
+  height: 500px;
+  
+}
+.default-panel {
+  padding: 10px 10px;
+}
+.modal-content h4 {
+  font-size: 16px;
+  color: #4d5679;
+  margin-left: 14px;
+  margin-top: 12px;
+  /* position: absolute; */
+  /* z-index: 2; */
+  /* text-align: center; */
+}
+.modal-list {
+   list-style-type: none;
+   padding-left: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.modal-list a {
+  text-decoration: none;
+  color: #8d8e94;  
+}
+.modal-list li {
+  margin: 9px 10px 0px 10px;
+  
+}
+
 .navbar {
   background-color: #fef8ee;
   height: 77px;
@@ -271,9 +357,13 @@ export default {
 .navbar-nav {
   text-align: right;
   /* background-color: #fafafa; */
-  margin-left: 70%;
+  margin-left: 10%;
   padding: 10px;
   border-radius: 4px;
+}
+.navbar-collapse, .collapse {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .search {
@@ -281,7 +371,7 @@ export default {
   position: relative;
   height: 40px;
   /* margin-right: 17px; */
-  /* margin-left: 30px; */
+  margin-left: 20%;
   margin-top: 2px;
   /* overflow:hidden; */
   border-radius: 20.25px;
@@ -313,7 +403,8 @@ li img {
   border: 0.9px solid #c4b7a2;
   box-sizing: border-box;
   border-radius: 20.25px;
-  width: 513px;
+  /* width: 513px; */
+  width: 250px;
   height: 40px;
   outline: none;
   overflow: hidden;
