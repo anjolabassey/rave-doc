@@ -21,7 +21,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
               <ais-index :search-client="searchClient" index-name="github-pages">
-                <ais-search-box
+                <ais-search-box 
+                  :autofocus="true"
                   placeholder="Search the documentation"
                   :class-names="{
                     'ais-input': 'searchBox',
@@ -361,17 +362,12 @@ export default {
   padding: 10px;
   border-radius: 4px;
 }
-.navbar-collapse, .collapse {
-  margin: 0 !important;
-  padding: 0 !important;
-}
 
 .search {
-  display: inline-flex;
+  /* display: inline-flex; */
   position: relative;
   height: 40px;
-  /* margin-right: 17px; */
-  margin-left: 20%;
+  margin-left: 25%;
   margin-top: 2px;
   /* overflow:hidden; */
   border-radius: 20.25px;

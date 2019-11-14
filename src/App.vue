@@ -62,21 +62,22 @@ export default {
 .searchBox {
   width: 100%;
   outline: none;
-  font-size: 15px;
-  padding: 7px;
+  font-size: 14px;
+  padding: 5px;
   /* margin-top: 25px; */
   /* box-sizing: border-box; */
   border: none;
-  border-bottom: 2px solid lightgrey;
-  border-radius: 4px;
+  border-bottom: 2px solid #8d8e94;
 }
 
 .modal-list a:hover {
   text-decoration: none;
   color: #f5a623 !important;
-  box-shadow: 1px 1px 3px rgba(50, 50, 54, 0.13),
-    0px 0px 3px rgba(63, 63, 68, 0.05);
 }
+/* .modal-list li:hover {
+  box-shadow: 1px 1px 2px rgba(50, 50, 54, 0.13),
+    0px 0px 2px rgba(63, 63, 68, 0.05);
+} */
 
 .searchBox__submit,
 .searchBox__reset,
