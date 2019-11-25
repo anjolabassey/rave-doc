@@ -24,7 +24,7 @@
                 <ais-search-box
                   
                   placeholder="Search the documentation"
-                  :autofocus="true"
+                  :autofocus="trueƒ"
                   :class-names="{
                     'ais-input': 'searchBox',
                     'ais-search-box__submit': 'searchBox__submit',

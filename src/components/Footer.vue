@@ -5,11 +5,11 @@
     </div>
 
     <div class="help-btn">
-      <router-link to="http://34.247.34.48/forum" target="_blank">Get Help</router-link>
+      <a target="_blank" href="http://34.247.34.48/forum">Get Help</a>
+      <!-- <router-link to="http://34.247.34.48/forum" target="_blank">Get Help</router-link> -->
     </div>
   </footer>
 </template>
-
 <script>
 
 
