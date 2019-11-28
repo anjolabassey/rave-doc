@@ -16,7 +16,10 @@ Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(InstantSearch);
 Vue.use(Popover);
-Vue.use(VueMeta);
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+});
 
 new Vue({
   router,
