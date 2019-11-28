@@ -10,7 +10,6 @@ import VueAxios from "vue-axios";
 import Popover from "vue-js-popover";
 import VueMeta from "vue-meta";
 
-
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
@@ -18,7 +17,8 @@ Vue.use(InstantSearch);
 Vue.use(Popover);
 Vue.use(VueMeta, {
   // optional pluginOptions
-  refreshOnceOnNavigation: true
+  // refreshOnceOnNavigation: true
+  tagIDKeyName: "hid"
 });
 
 new Vue({

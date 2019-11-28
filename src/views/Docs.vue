@@ -198,11 +198,13 @@ export default {
         title: "My Example App",
         meta: [
           {
-            property: "og:title",
+            hid: "og:title",
+            name: "og:title",
             content: "The dynamic meta title of our example app."
           },
           {
-            property: "og:description",
+            hid: "og:description",
+            name: "og:description",
             content: "The dynamic meta description of our example app."
           }
         ]

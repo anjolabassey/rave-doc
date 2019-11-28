@@ -47,5 +47,6 @@ export default new Router({
       component: Payments
     }
   ],
-  mode: "history"
+  mode: "history",
+  base: "/ssr"
 });
