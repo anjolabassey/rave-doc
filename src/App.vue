@@ -14,7 +14,7 @@ export default {
   metaInfo() {
     return {
       
-      title: 'Flutterwave Documentation(test)',
+      title: 'Flutterwave Documentation',
       meta: [
           { 
             hid: "description",
@@ -28,7 +28,7 @@ export default {
           },
           {
             hid: "og:description",
-            name: "og:descriptio",
+            name: "og:description",
             content: "The default meta description of our example app."
           }
         ]
