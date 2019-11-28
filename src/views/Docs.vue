@@ -175,6 +175,31 @@ export default {
     NeedHelp,
     Test
   },
+  metaInfo() {
+    return {
+      title: "My Example App",
+      meta: [
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "The dynamic meta title of our example app."
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: "The dynamic meta description of our example app."
+        }
+      ]
+    }
+  },
+  mounted() {
+    const { set, remove } = this.$meta().addApp('client-only')
+      set({
+        bodyAttrs: { class: 'client-only' }
+      })
+
+      setTimeout(() => remove(), 3000)
+  },
   data() {
     return {
       selectedFeature: this.feature,
@@ -193,22 +218,7 @@ export default {
       headings: "",
       content: "",
       comment: "",
-      copyInput: "",
-      metaInfo: {
-        title: "My Example App",
-        meta: [
-          {
-            hid: "og:title",
-            name: "og:title",
-            content: "The dynamic meta title of our example app."
-          },
-          {
-            hid: "og:description",
-            name: "og:description",
-            content: "The dynamic meta description of our example app."
-          }
-        ]
-      }
+      copyInput: ""
     };
   },
 
@@ -278,13 +288,12 @@ export default {
       let baseURL = window.location.href;
 
       [].forEach.call(headings, function(el) {
-        el.id = el.innerText.replace(/\s+/g, '-');
+        el.id = el.innerText.replace(/\s+/g, "-");
         storeHeadings.push(el);
 
         const linkIcon = document.createElement("a");
-        
 
-        linkIcon.setAttribute("href", `#${el.innerText.replace(/\s+/g, '-')}`);
+        linkIcon.setAttribute("href", `#${el.innerText.replace(/\s+/g, "-")}`);
         linkIcon.setAttribute("class", "hide");
         linkIcon.innerHTML = linkContent;
 
@@ -301,7 +310,7 @@ export default {
       });
       var right_nav = "<ul>";
       storeHeadings.forEach(item => {
-        var url = item.innerText.replace(/\s+/g, '-');
+        var url = item.innerText.replace(/\s+/g, "-");
         // console.log("url: " + item.innerText)
         // console.log("encoded url: " + item.innerText.replace(/\s+/g, ''));
         // console.log(item.innerText)
@@ -358,7 +367,11 @@ export default {
     selectSdk() {
       this.$router.push({
         name: "docs",
-        params: { feature: this.feature, language: this.language, article: this.article }
+        params: {
+          feature: this.feature,
+          language: this.language,
+          article: this.article
+        }
       });
       this.displayContent("");
     },
@@ -381,7 +394,6 @@ export default {
     },
     // Fetch and display the content from github
     displayContent(value) {
-      
       let vm = this;
       let url;
       // console.log(value);
@@ -409,7 +421,8 @@ export default {
           content = md.render(content);
 
           vm.content = content
-          .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>').replace(/<h2>/gi, '<h2 id="heading2">');
+            .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>')
+            .replace(/<h2>/gi, '<h2 id="heading2">');
 
           vm.waitTillLoadIsComplete(".copy-btn");
           vm.waitTillHeadingIsComplete("#heading2");
@@ -434,17 +447,26 @@ export default {
       event.preventDefault();
 
       let url = event.target.id;
-      
-      
+
       this.selectedLanguage = url.split("/")[1];
       this.selectedFeature = url.split("/")[2];
       this.selectedArticle = url.split("/")[3];
 
-      console.log(this.selectedLanguage + ", " + this.selectedFeature + ", " + this.selectedArticle)
+      console.log(
+        this.selectedLanguage +
+          ", " +
+          this.selectedFeature +
+          ", " +
+          this.selectedArticle
+      );
 
       this.$router.push({
         name: "docs",
-        params: { feature: this.feature, language: this.language, article: this.article }
+        params: {
+          feature: this.feature,
+          language: this.language,
+          article: this.article
+        }
       });
 
       this.displayContent(url);
