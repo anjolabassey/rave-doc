@@ -214,7 +214,7 @@
           <li v-else class="nav-item">
             <router-link
               :to="{ name: 'login' }"
-              target="_blank"
+             
               class="btn my-2 my-sm-0"
             >Get API Keys</router-link>
           </li>

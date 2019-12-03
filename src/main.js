@@ -18,7 +18,8 @@ Vue.use(Popover);
 Vue.use(VueMeta, {
   // optional pluginOptions
   // refreshOnceOnNavigation: true
-  tagIDKeyName: "hid"
+  tagIDKeyName: "hid",
+  keyName: "metaInfo"
 });
 
 new Vue({
