@@ -19,17 +19,17 @@ export default {
           { 
             hid: "description",
             name: "description", 
-            content: "Testing Flutterwave documentation. Solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
+            content: "Flutterwave documentation. A solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
           },
           {
             hid: "og:title",
             name: "og:title",
-            content: "The default meta title of our example app."
+            content: "Flutterwave Documentation"
           },
           {
             hid: "og:description",
             name: "og:description",
-            content: "The default meta description of our example app."
+            content: "Flutterwave documentation. A solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
           }
         ]
     }

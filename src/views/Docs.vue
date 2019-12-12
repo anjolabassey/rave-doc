@@ -177,17 +177,17 @@ export default {
   },
   metaInfo() {
     return {
-      title: "My Example App",
+      title: "Flutterwave documentation",
       meta: [
         {
           hid: "og:title",
           name: "og:title",
-          content: "The dynamic meta title of our example app."
+          content: `${this.feature}`
         },
         {
           hid: "og:description",
           name: "og:description",
-          content: "The dynamic meta description of our example app."
+          content: `Flutterwave's ${this.artcle}`
         }
       ]
     }
