@@ -45,7 +45,7 @@
 <script>
 export default {
   name: "Login",
-  props: ["loggedIn"],
+  // props: ["loggedIn"],
   data() {
     return {
       isError: false,
@@ -54,6 +54,7 @@ export default {
       flwAuthToken: "",
       buttonText: "Login",
       errorText: "error Text"
+      // loggedIn: this.loggedIn
     };
   },
   methods: {
@@ -142,7 +143,7 @@ export default {
         .then(response => {
           // console.log(response.statusText);
 
-          vm.loggedIn = true;
+          // vm.loggedIn = true;
           vm.buttonText = "Logged In";
           vm.$router.push('/')
           // self.$router.push("/home");

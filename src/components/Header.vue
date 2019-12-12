@@ -24,7 +24,7 @@
                 <ais-search-box
                   
                   placeholder="Search the documentation"
-                  :autofocus="trueƒ"
+                  :autofocus="true"
                   :class-names="{
                     'ais-input': 'searchBox',
                     'ais-search-box__submit': 'searchBox__submit',
@@ -273,11 +273,11 @@ export default {
     //   console.log("clicked: " + event);
     // })
 
-    search.addEventListener("click", function(event) {
+    // search.addEventListener("click", function(event) {
 
-      document.getElementsByClassName("searchBox")[0].autofocus = true;
+    //   document.getElementsByClassName("searchBox")[0].autofocus = true;
       
-    })
+    // })
     
   },
   methods: {
