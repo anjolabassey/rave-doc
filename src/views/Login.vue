@@ -45,7 +45,7 @@
 <script>
 export default {
   name: "Login",
-  props: ["loggedIn"],
+  // props: ["loggedIn"],
   data() {
     return {
       isError: false,
@@ -54,6 +54,7 @@ export default {
       flwAuthToken: "",
       buttonText: "Login",
       errorText: "error Text"
+      // loggedIn: this.loggedIn
     };
   },
   methods: {
@@ -140,18 +141,20 @@ export default {
           );
         })
         .then(response => {
-          console.log(response.statusText);
+          // console.log(response.statusText);
 
-          vm.loggedIn = true;
-          this.buttonText = "Logged In";
+          // vm.loggedIn = true;
+          vm.buttonText = "Logged In";
+          vm.$router.push('/')
           // self.$router.push("/home");
-          this.$router.push({
-            name: "docs",
-            params: { feature: feature, language: language, article: article }
-          });
+          // vm.$router.push({
+          //   name: "docs",
+          //   params: { feature: feature, language: language, article: article }
+          // });
           document.getElementById("loginButton").disabled = false;
         })
         .catch(function(error) {
+          console.log(error)
           var errorMessage = error.response.data.message;
 
           vm.isError = true;

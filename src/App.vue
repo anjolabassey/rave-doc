@@ -11,24 +11,37 @@
 <script>
 export default {
   name: 'App',
-  metaInfo: {
+  metaInfo() {
+    return {
       
       title: 'Flutterwave Documentation',
       meta: [
           { 
+            hid: "description",
             name: "description", 
-            content: "Flutterwave documentation. Solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
+            content: "Flutterwave documentation. A solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
           },
           {
-            property: "og:title",
-            content: "The meta title of our example app."
+            hid: "og:title",
+            name: "og:title",
+            content: "Flutterwave Documentation"
           },
           {
-            property: "og:description",
-            content: "The meta description of our example app."
+            hid: "og:description",
+            name: "og:description",
+            content: "Flutterwave documentation. A solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
           }
         ]
     }
+  },
+  mounted() {
+    const { set, remove } = this.$meta().addApp('client-only')
+      set({
+        bodyAttrs: { class: 'client-only' }
+      })
+
+      setTimeout(() => remove(), 3000)
+  }
 }
 </script>
 
