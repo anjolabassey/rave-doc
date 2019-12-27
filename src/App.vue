@@ -101,10 +101,12 @@ export default {
 .ais-results {
   margin-top: 20px;
 }
+
 .ais-description .subtitle {
   font-weight: 300;
   font-size: 2px;
 }
+
 .panel {
   color: red;
 }
