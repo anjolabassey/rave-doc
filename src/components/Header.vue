@@ -22,7 +22,6 @@
               </button>
               <ais-index :search-client="searchClient" index-name="github-pages">
                 <ais-search-box
-                  
                   placeholder="Search the documentation"
                   :autofocus="true"
                   :class-names="{
@@ -204,7 +203,7 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >{{username}}</a>
+            >{{ username }}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Profile</a>
               <a @click="logout" class="dropdown-item">Logout</a>
@@ -212,11 +211,7 @@
           </li>
 
           <li v-else class="nav-item">
-            <router-link
-              :to="{ name: 'login' }"
-             
-              class="btn my-2 my-sm-0"
-            >Get API Keys</router-link>
+            <router-link :to="{ name: 'login' }" class="btn my-2 my-sm-0">Get API Keys</router-link>
           </li>
         </ul>
       </div>
@@ -266,7 +261,7 @@ export default {
         .join("");
       this.username = localStorage.username;
       this.initials = initials;
-    }   
+    }
   },
   methods: {
     // Log user out of their profile on the documentation
@@ -309,7 +304,7 @@ export default {
           this.$refs.content.innerHTML = md.render(content);
           this.$refs.content.innerHTML;
           var pre = document.getElementsByTagName("code");
-          // Attach stylings to the code snippets 
+          // Attach stylings to the code snippets
           Array.from(pre).forEach(el => {
             el.classList.add("highlight");
           });
@@ -321,7 +316,6 @@ export default {
             linkIcon.setAttribute("href", `#${heading.innerHTML}`);
             linkIcon.setAttribute("class", "anchor");
             linkIcon.innerHTML = linkContent;
-            
           }
         })
         .catch(function(error) {
@@ -419,13 +413,10 @@ export default {
   border-radius: 4px;
 }
 .navbar-light .navbar-nav .nav-item:hover {
-  color:#f5a623;
+  color: #f5a623;
   padding: 5px;
-  box-shadow: 1px 1px 2px rgba(50, 50, 54, 0.13),
-    0px 0px 2px rgba(63, 63, 68, 0.05);
-  
+  box-shadow: 1px 1px 2px rgba(50, 50, 54, 0.13);
 }
-
 .search {
   /* display: inline-flex; */
   position: relative;

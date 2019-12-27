@@ -18,7 +18,7 @@ export default {
       meta: [
           { 
             hid: "description",
-            name: "description", 
+            name: "description",
             content: "Flutterwave documentation. A solution for online and offline payments. Integrate with speed and robust security using our embed codes and start accepting payments today"
           },
           {

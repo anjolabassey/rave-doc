@@ -26,7 +26,7 @@
               <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
               <ul v-if="link.subfolderitems">
                 <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
-                  <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
+                  <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
                 </li>
               </ul>
             </li>
@@ -62,7 +62,7 @@
           <router-link to="/">Back</router-link>
         </div>
 
-        <p class="heading">{{this.selectedSdk}}</p>
+        <p class="heading">{{ this.selectedSdk }}</p>
         <select class="custom-select select" v-on:change="selectSdk" v-model="selectedSdk">
           <option selected>Select Technology</option>
           <option v-for="item in sdkItems" :value="item.value" :key="item.value">{{ item.name }}</option>
@@ -94,11 +94,11 @@
           <p class="header">YOUR API KEYS</p>
           <p class="text">
             Public key:
-            <span class="keys">{{publicKey}}</span>
+            <span class="keys">{{ publicKey }}</span>
           </p>
           <p class="text">
             Secret key:
-            <span class="keys">{{secretKey}}</span>
+            <span class="keys">{{ secretKey }}</span>
           </p>
         </div>
 
@@ -161,6 +161,8 @@
 <script>
 import Header from "../components/Header";
 import NeedHelp from "../components/NeedHelp";
+
+import { Remarkable } from 'remarkable';
 
 export default {
   name: "Docs",
