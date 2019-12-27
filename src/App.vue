@@ -172,6 +172,9 @@ export default {
   margin-right: 4px;
   top: 2px;
 }
+.content img {
+  width: 100%;
+}
 pre {
   position: relative;
   page-break-inside: avoid;
@@ -206,6 +209,10 @@ pre {
 }
 .show {
   visibility: visible;
+}
+.disable {
+  pointer-events: none;
+  cursor: default;
 }
 .heading ul {
   padding: 0 !important;

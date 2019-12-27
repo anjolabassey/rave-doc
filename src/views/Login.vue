@@ -45,7 +45,6 @@
 <script>
 export default {
   name: "Login",
-  // props: ["loggedIn"],
   data() {
     return {
       isError: false,
@@ -54,13 +53,13 @@ export default {
       flwAuthToken: "",
       buttonText: "Login",
       errorText: "error Text"
-      // loggedIn: this.loggedIn
     };
   },
   methods: {
+    // Log user in and fetch their test keys.
     login(event) {
       const vm = this;
-      this.buttonText = "Fetching Keys..";
+      this.buttonText = "Fetching Keys...";
       document.getElementById("loginButton").disabled = true;
       event.preventDefault();
       let loginRequestObject = {
@@ -141,46 +140,38 @@ export default {
           );
         })
         .then(response => {
-          // console.log(response.statusText);
-
-          // vm.loggedIn = true;
           vm.buttonText = "Logged In";
-          vm.$router.push('/')
-          // self.$router.push("/home");
-          // vm.$router.push({
-          //   name: "docs",
-          //   params: { feature: feature, language: language, article: article }
-          // });
           document.getElementById("loginButton").disabled = false;
+          vm.$router.go(-1)
+          
         })
         .catch(function(error) {
-          console.log(error)
+          console.log(error.response.data.message)
           var errorMessage = error.response.data.message;
 
           vm.isError = true;
-          vm.errorText = errorMessage;
+          
           vm.buttonText = "Login";
           document.getElementById("loginButton").disabled = false;
 
-          //          if (
-          //   errorText.message == "identifier is required , password is required"
-          // ) {
-          //   $(".error").remove();
-          //   $("#submit").after('<span class="error"></span>');
-          // } else if (
-          //   errorText.message ==
-          //   "Error: You have logged in too many times. Please wait an hour before trying again"
-          // ) {
-          //   $(".error").remove();
-          //   $("#submit").after(
-          //     '<span class="error">' + errorText.message + "</span>"
-          //   );
-          // } else {
-          //   $(".error").remove();
-          //   $("#submit").after(
-          //     '<span class="error">' + errorText.message + "</span>"
-          //   );
-          // }
+          if (
+            errorMessage == "identifier is required , password is required"
+          ) {
+            vm.errorText = "Email and Password is required";
+          } else if (
+            errorMessage ==
+            "Error: You have logged in too many times. Please wait an hour before trying again"
+          ) {
+            vm.errorText = "You have logged in too many times. Please wait an hour before trying again";
+          }
+          else if(
+
+            errorMessage == "Error: Sorry, incorrect email or password. Please check and try again") 
+          {
+            vm.errorText = "Incorrect email or password. Please check and try again";
+          } else {
+            vm.errorText = errorMessage;
+          }
         });
     }
   }

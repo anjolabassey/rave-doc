@@ -184,7 +184,7 @@
             <a class="nav-link" target="_blank" href="https://support.flutterwave.com">Support</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link">Blog</a>
           </li>
 
           <li v-if="loggedIn" class="nav-item dropdown">
@@ -207,7 +207,7 @@
             >{{username}}</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Profile</a>
-              <a @click="logout" class="dropdown-item" href="#">Logout</a>
+              <a @click="logout" class="dropdown-item">Logout</a>
             </div>
           </li>
 
@@ -266,19 +266,7 @@ export default {
         .join("");
       this.username = localStorage.username;
       this.initials = initials;
-    }
-    // var ss = document.getElementsByClassName("searchBox");
-    // console.log(ss);
-    // ss.addEventListener("click", function(event) {
-    //   console.log("clicked: " + event);
-    // })
-
-    // search.addEventListener("click", function(event) {
-
-    //   document.getElementsByClassName("searchBox")[0].autofocus = true;
-      
-    // })
-    
+    }   
   },
   methods: {
     // Log user out of their profile on the documentation
@@ -318,24 +306,23 @@ export default {
           var md = new Remarkable({
             html: true
           });
-          // this.content = md.render(content);
           this.$refs.content.innerHTML = md.render(content);
           this.$refs.content.innerHTML;
           var pre = document.getElementsByTagName("code");
+          // Attach stylings to the code snippets 
           Array.from(pre).forEach(el => {
             el.classList.add("highlight");
           });
 
+          // Append link anchors to all headings
           const linkContent = "  &#9875";
-
           for (const heading of headings) {
             const linkIcon = document.createElement("a");
             linkIcon.setAttribute("href", `#${heading.innerHTML}`);
             linkIcon.setAttribute("class", "anchor");
             linkIcon.innerHTML = linkContent;
-            // heading.append(linkIcon);
+            
           }
-          // console.log(pre);
         })
         .catch(function(error) {
           console.log(error);
@@ -420,13 +407,23 @@ export default {
   padding: 13px 21px;
   margin-top: 19px;
 }
+.navbar-collapse {
+  z-index: 10 !important;
+}
 
 .navbar-nav {
   text-align: right;
-  /* background-color: #fafafa; */
-  margin-left: 10%;
+  background-color: #fafafa;
+  margin-left: 60%;
   padding: 10px;
   border-radius: 4px;
+}
+.navbar-light .navbar-nav .nav-item:hover {
+  color:#f5a623;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgba(50, 50, 54, 0.13),
+    0px 0px 2px rgba(63, 63, 68, 0.05);
+  
 }
 
 .search {

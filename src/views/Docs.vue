@@ -74,7 +74,12 @@
             v-for="link in pathLinks[this.feature][this.selectedSdk]"
             :key="link.title"
           >
-            <a :id="link.url" class="menu-item" @click="changeContent">{{ link.title }}</a>
+            <a
+              :id="link.url"
+              class="menu-item"
+              v-bind:class="{ disable: link.subfolderitems }"
+              @click="changeContent"
+            >{{ link.title }}</a>
             <ul v-if="link.subfolderitems">
               <li class="sub-menu" v-for="link in link.subfolderitems" :key="link.title">
                 <a :id="link.url" class="menu-item" @click="changeContent">{{link.title}}</a>
@@ -97,13 +102,7 @@
           </p>
         </div>
 
-        <div v-html="content">
-          <!-- <div> -->
-          <!-- {{content}} -->
-          <!-- <ul>
-          <li class="menu" v-for="item in content">{{ item["Transfer Overview"] }}</li>
-          </ul>-->
-        </div>
+        <div v-html="content" class="content"></div>
       </div>
 
       <div class="right-nav">
@@ -113,8 +112,6 @@
         </select>
 
         <hr />
-
-        <!-- <gg /> -->
 
         <p class="heading" v-html="headings">TABLE OF CONTENTS</p>
 
@@ -156,8 +153,7 @@
       </form>
     </popover>
     <div>
-      <p>{{copyInput}}</p>
-      <input type="hidden" id="copy-input" :value="copyInput" />
+      <input id="copy-input" :value="copyInput" type="hidden" />
     </div>
   </div>
 </template>
@@ -165,15 +161,13 @@
 <script>
 import Header from "../components/Header";
 import NeedHelp from "../components/NeedHelp";
-import Test from "../components/Test";
 
 export default {
   name: "Docs",
   props: ["feature", "language", "article"],
   components: {
     Header,
-    NeedHelp,
-    Test
+    NeedHelp
   },
   metaInfo() {
     return {
@@ -190,19 +184,19 @@ export default {
           content: `Flutterwave's ${this.artcle}`
         }
       ]
-    }
+    };
   },
   mounted() {
-    const { set, remove } = this.$meta().addApp('client-only')
-      set({
-        bodyAttrs: { class: 'client-only' }
-      })
+    const { set, remove } = this.$meta().addApp("client-only");
+    set({
+      bodyAttrs: { class: "client-only" }
+    });
 
-      setTimeout(() => remove(), 3000)
+    setTimeout(() => remove(), 3000);
   },
   data() {
     return {
-      selectedFeature: this.feature,
+      selectedFeature: this.feature ? this.feature : "subscriptions",
       selectedLanguage: "",
       selectedArticle: "",
       showKeys: false,
@@ -223,15 +217,10 @@ export default {
   },
 
   created() {
-    // console.log("created");
     this.getPathLink();
     this.displayContent("");
   },
   mounted() {
-    // console.log("mounted");
-    // this.waitTillLoadIsComplete(".copy-btn");
-    // this.waitTillHeadingIsComplete("#heading2");
-
     if (localStorage.loggedIn) {
       this.showKeys = localStorage.loggedIn;
     }
@@ -245,45 +234,44 @@ export default {
     execFunc(func) {
       func();
     },
+    // Copy button functionality
     copyCode(val) {
       const buttons = document.querySelectorAll(val);
       var vm = this;
 
       Array.from(buttons).forEach(el => {
         el.addEventListener("click", function(event) {
-          // console.log(event.target.nextElementSibling.innerText);
-          var copiedText = event.target.nextElementSibling.innerText;
-          var pub = copiedText.search("npm");
-          var sec = copiedText.search("ravepay");
+          let copiedText = event.target.nextElementSibling.innerText;
+          let pub = copiedText.search("npm");
+          let sec = copiedText.search("ravepay");
 
-          if (pub > 0 || sec > 0) {
-            copiedText = copiedText.replace("npm", "newNpm");
-            copiedText = copiedText.replace("ravepay", "newRavepay");
-          }
+          // Replace occurences of public key and secret key with the users public and secret key when logged in
+          // Uncomment code snippet below
+          //  if (PBFPubKey > 0 || secKey > 0) {
+          //   copiedText = copiedText.replace("PBFPubKey", this.publicKey);
+          //   copiedText = copiedText.replace("secKey", this.secretKey);
+          // }
 
-          // vm.copyInput = copiedText;
-
-          var copyText = document.querySelector("#copy-input");
-
-          copyText.value = copiedText;
+          let copyText = document.querySelector("#copy-input");
           copyText.setAttribute("type", "text");
+          copyText.value = copiedText;
           copyText.select();
 
           try {
             var successful = document.execCommand("copy");
             var msg = successful ? "successfully" : "unsuccessfully";
-            console.log("code was copied " + msg);
           } catch (err) {
             console.log("Oops, unable to copy");
           }
-          // vm.copyInput = "";
+          copyText.setAttribute("type", "hidden");
+          window.getSelection().removeAllRanges();
         });
       });
     },
+    // Add anchor links to the content headings(h2)
     linkHeadings(val) {
       const headings = document.querySelectorAll(val);
       const linkContent = `<i class="fas fa-link f2"></i>`;
-      // console.log(headings);
       var storeHeadings = [];
       let baseURL = window.location.href;
 
@@ -311,9 +299,6 @@ export default {
       var right_nav = "<ul>";
       storeHeadings.forEach(item => {
         var url = item.innerText.replace(/\s+/g, "-");
-        // console.log("url: " + item.innerText)
-        // console.log("encoded url: " + item.innerText.replace(/\s+/g, ''));
-        // console.log(item.innerText)
         right_nav += `<li class="menu"><a class="menulink" href="#${url}">${item.innerText}</a></li>`;
       });
 
@@ -326,12 +311,11 @@ export default {
           if (btn !== null) {
             // console.log(">>>. Found Header", btn);
 
-            // resolve(id);
+            resolve(id);
             clearInterval(id);
-
             this.linkHeadings(selector);
           } else {
-            // console.log(">>> Waiting for Header");
+            console.log(">>> Waiting");
           }
         }, 1000);
       });
@@ -342,26 +326,12 @@ export default {
           let btn = document.querySelector(selector);
           if (btn !== null) {
             // console.log(">>>. Found Button", btn);
-
-            // resolve(id);
+            resolve(id);
             clearInterval(id);
             this.copyCode(selector);
-            // this.linkHeadings(selector);
-          } else console.log(">>> ");
+          } else console.log(">>> Waiting ");
         }, 1000);
       });
-
-      // const id = setInterval(() => {
-      //   let btn = document.querySelector(".copy-btn");
-      //   if (btn !== null) {
-      //     console.log(">>>. Found Button", btn);
-      //     clearInterval(id);
-      //   } else console.log(">>> Waiting for button");
-      // }, 1000);
-    },
-
-    alertMe() {
-      alert("It works");
     },
     // Switch content based on selected sdk
     selectSdk() {
@@ -377,7 +347,6 @@ export default {
     },
     // Get the path links
     getPathLink() {
-      // if(this.pathLinks == []) {
       this.$http
         .get(
           "https://api.github.com/repos/anjolabassey/test-docs/contents/paths.json"
@@ -390,13 +359,12 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      // }
     },
     // Fetch and display the content from github
     displayContent(value) {
       let vm = this;
       let url;
-      // console.log(value);
+
       if (value == "") {
         url = `https://rave-documentation.herokuapp.com/content?path=${this.language}/${this.feature}/${this.article}.md`;
       } else {
@@ -404,7 +372,6 @@ export default {
 
         url = `https://rave-documentation.herokuapp.com/content?path=${value}`;
       }
-      // console.log(url);
 
       this.$http
         .get(url)
@@ -421,7 +388,10 @@ export default {
           content = md.render(content);
 
           vm.content = content
-            .replace(/<pre>/gi, '<pre><button class="copy-btn">Copy</button>')
+            .replace(
+              /<pre>/gi,
+              '<pre><button id="copy-btn" class="copy-btn">Copy</button>'
+            )
             .replace(/<h2>/gi, '<h2 id="heading2">');
 
           vm.waitTillLoadIsComplete(".copy-btn");
@@ -445,27 +415,28 @@ export default {
     // Change the content based on the lick clicked in the navigation
     changeContent(event) {
       event.preventDefault();
-
+      let article;
       let url = event.target.id;
 
       this.selectedLanguage = url.split("/")[1];
       this.selectedFeature = url.split("/")[2];
-      this.selectedArticle = url.split("/")[3];
+      article = url.split("/")[3];
+      this.selectedArticle = article.substring(0, article.length-3)
 
-      console.log(
-        this.selectedLanguage +
-          ", " +
-          this.selectedFeature +
-          ", " +
-          this.selectedArticle
-      );
+      if (
+        this.selectedLanguage == undefined ||
+        this.selectedFeature == undefined ||
+        this.selectedArticle == undefined
+      ) {
+        console.log("i'm undefined");
+      }
 
       this.$router.push({
         name: "docs",
         params: {
-          feature: this.feature,
-          language: this.language,
-          article: this.article
+          feature: this.selectedFeature,
+          language: this.selectedLanguage,
+          article: this.selectedArticle
         }
       });
 
@@ -478,12 +449,11 @@ export default {
 
       event.target.classList.add("active-link");
     },
-    // Give page good rating
+    // Give page content a good rating
     rateGood() {
-      // var ratingObject = {
-      //   url: "fgrtr"
-      // };
-      console.log("thumbs up");
+      var ratingObject = {
+        url: this.$route.path
+      };
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-up", ratingObject)
       //   .then(response => {
@@ -495,15 +465,14 @@ export default {
 
       //   });
     },
-    // Give page bad rating
+    // Give page content a bad rating
     rateBad: function(event) {
       event.preventDefault();
-      // console.log("thumbs down cossa: " + this.comment);
-
       this.$refs.popover.visible = false;
 
       // var ratingObject = {
-      //   url: "fgrtr"
+      //   url: this.$route.path,
+      //   comment: this.comment
       // };
       // this.$http
       //   .post("http://04ff9f9a.ngrok.io/thumbs-down", ratingObject)

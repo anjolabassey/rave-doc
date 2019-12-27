@@ -39,7 +39,7 @@
                   is great for Individuals and merchants who don't
                   have developer resources.
                 </p>
-                <a href="#" >View documentation</a>
+                <a>View documentation</a>
               </div>
               </router-link>
             </div>
@@ -55,7 +55,7 @@
                 is great for Individuals and merchants who don't
                 have developer resources.
               </p>
-              <a href="#" class>View documentation</a>
+              <a>View documentation</a>
             </div>
           </div>
 
@@ -69,7 +69,7 @@
                 is great for Individuals and merchants who don't
                 have developer resources.
               </p>
-              <a href="#" class>View documentation</a>
+              <a>View documentation</a>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
                 transaction between two (2) or more accounts
                 and collect fees on the transaction.
               </p>
-              <a href="#" class>View documentation</a>
+              <a>View documentation</a>
             </div>
           </div>
 
@@ -98,7 +98,7 @@
                 is great for Individuals and merchants who don't
                 have developer resources.
               </p>
-              <a href="#" class>View documentation</a>
+              <a>View documentation</a>
             </div>
           </div>
 
@@ -111,7 +111,7 @@
                 and perform KYC.  It allows you verify BVN supplied by a customer and can also be used for customer KYC methods
                 
               </p>
-              <a href="#" class>View documentation</a>
+              <a>View documentation</a>
             </div>
           </div>
 
@@ -179,9 +179,8 @@
               at elementum velit accumen pulvinar.
             </p>
           </div>
-          <div @click="changed" class="footer">
-            <!-- <a href="#" class>Read more</a> -->
-            <p>{{ $store.getters.loggedIn }}</p>
+          <div class="footer">
+            <a href="#" class>Read more</a>
           </div>
         </div>
       </div>
@@ -211,16 +210,10 @@ export default {
   },
   methods: {
     goToDocs(feature, language, article) {
-      //   alert(`we going`);
       this.$router.push({
         name: "docs",
         params: { feature: feature, language: language, article: article }
       });
-    },
-    changed() {
-      this.$store.commit('change', true)
-      console.log($store.getters.loggedIn)
-
     }
   }
 };
