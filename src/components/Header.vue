@@ -407,7 +407,7 @@ export default {
 
 .navbar-nav {
   text-align: right;
-  background-color: #fafafa;
+  background-color:#fef8ee;
   margin-left: 60%;
   padding: 10px;
   border-radius: 4px;
