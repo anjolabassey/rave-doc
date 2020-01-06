@@ -71,6 +71,28 @@ export default {
   font-family: Open-Sans-Semibold;
   src: url(./assets/font/OpenSans-Semibold.ttf);
 }
+.loader-container {
+  text-align: center;
+}
+.loader {
+  margin: 250px auto 50px auto;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #f5a623;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* style algolia search */
 .searchBox {
   width: 100%;

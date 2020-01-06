@@ -212,7 +212,7 @@ export default {
       selectedSdk: "node",
       pathLinks: [],
       headings: "",
-      content: "",
+      content: `<div class="loader-container"><div class="loader"></div><h3>Fetching Content....</h3></div>`,
       comment: "",
       copyInput: ""
     };
